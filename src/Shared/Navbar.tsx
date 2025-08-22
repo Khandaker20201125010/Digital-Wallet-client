@@ -89,7 +89,7 @@ function NavBar(): React.JSX.Element {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <motion.nav
-            className="sticky top-0 z-50 w-full p-3 bg-white/70 dark:bg-black/70 backdrop-blur-lg border-b border-gray-200/60 dark:border-gray-800/60 shadow-md overflow-hidden"
+            className="sticky top-0 z-50  w-full p-3 bg-white/70 dark:bg-black/70 backdrop-blur-lg border-b border-gray-200/60 dark:border-gray-800/60 shadow-md overflow-hidden"
             initial="initial"
             whileHover="hover"
         >
@@ -107,7 +107,7 @@ function NavBar(): React.JSX.Element {
             <div className="flex items-center justify-between relative z-10">
                 {/* Brand */}
                 <Link to="/" className="text-xl font-bold text-gray-800 dark:text-gray-200">
-                    MyBrand
+                    NexusPay 
                 </Link>
 
                 {/* Desktop nav */}
