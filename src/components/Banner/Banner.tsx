@@ -1,14 +1,14 @@
 import CountUp from "react-countup";
 import digitalCardOne from "../../assets/images/digital-card-one.png";
 import digitalCardtwo from "../../assets/images/digital-card-two.png";
-
+import 'animate.css';
 const Banner = () => {
     return (
         <section className="relative w-full bg-white dark:bg-[#0B0C10] text-gray-900 dark:text-white">
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between px-6 md:px-12 py-20">
 
                 {/* LEFT CONTENT */}
-                <div className="md:w-1/2 text-center md:text-left">
+                <div className="animate__animated animate__slideInUp animate__slow md:w-1/2 text-center md:text-left">
                     <h1 className="text-4xl md:text-6xl font-bold leading-tight">
                         The Ultimate <br />
                         <span className="bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text dark:from-purple-400 dark:to-pink-400">
@@ -57,7 +57,7 @@ const Banner = () => {
                 </div>
 
                 {/* RIGHT CONTENT */}
-                <div className="relative md:w-1/2 flex justify-center mt-12 md:mt-0 max-sm:py-5">
+                <div className="animate__animated   animate__zoomIn relative animate__slow  md:w-1/2 flex justify-center mt-12 md:mt-0 max-sm:py-5">
                     {/* Glow Effect */}
                     <div className="absolute w-[600px] h-[450px] bg-purple-500 dark:bg-purple-700 rounded-full blur-[180px] opacity-50"></div>
 
@@ -78,7 +78,7 @@ const Banner = () => {
 
 
                 {/* Stats Section */}
-                <div className="max-w-4xl mx-auto flex flex-col max-sm:flex-row items-center justify-between gap-10 max-sm:gap-5 text-center px-6 py-12">
+                <div className="animate__animated  animate__slideInDown animate__slow  max-w-4xl mx-auto flex flex-col max-sm:flex-row items-center justify-between gap-10 max-sm:gap-5 text-center px-6 py-12">
                     <div className="flex-1">
                         <h2 className="text-3xl max-sm:text-xl font-bold text-gray-900 dark:text-white">  <CountUp end={93} duration={2} separator="," />+</h2>
                         <p className="text-gray-600 dark:text-gray-400 max-sm:text-sm">Satisfied user</p>
