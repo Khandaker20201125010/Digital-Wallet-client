@@ -174,7 +174,7 @@ const Footer = () => {
                 </filter>
               </defs>
             </svg>
-            <h3 className="text-3xl font-extrabold text-blue-600 dark:text-teal-400">
+            <h3 className="text-3xl font-extrabold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent dark:text-teal-400">
               NexusPay
             </h3>
           </div>

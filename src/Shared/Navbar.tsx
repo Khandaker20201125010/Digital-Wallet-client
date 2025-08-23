@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { Home, Settings, Bell, User, Menu, X } from "lucide-react";
 import { Link } from "react-router";
+import { ModeToggle } from "@/Layouts/mode-toggle";
 
 interface NavItem {
     icon: React.ReactNode;
@@ -44,6 +45,14 @@ const navItems: NavItem[] = [
         gradient:
             "radial-gradient(circle, rgba(239,68,68,0.15) 0%, rgba(220,38,38,0.06) 50%, rgba(185,28,28,0) 100%)",
         iconColor: "group-hover:text-red-500 dark:group-hover:text-red-400",
+    },
+    {
+        icon: <User className="h-5 w-5" />,
+        label: "FAQ",
+        path: "/faq",
+        gradient:
+            "radial-gradient(circle, rgba(139,92,246,0.15) 0%, rgba(124,58,237,0.06) 50%, rgba(109,40,217,0) 100%)",
+        iconColor: "group-hover:text-violet-500 dark:group-hover:text-violet-400",
     },
 ];
 
@@ -106,12 +115,14 @@ function NavBar(): React.JSX.Element {
             {/* Top bar (logo + nav + toggle) */}
             <div className="flex items-center justify-between relative z-10">
                 {/* Brand */}
-                <Link to="/" className="text-xl font-bold text-gray-800 dark:text-gray-200">
-                    NexusPay 
+                <Link to="/" className="text-xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent dark:text-gray-200">
+                    NexusPay
                 </Link>
 
+
                 {/* Desktop nav */}
-                <ul className="hidden md:flex items-center gap-6">
+               <ul className="hidden md:flex items-center gap-4 lg:gap-8 xl:gap-10">
+
                     {navItems.map((item) => (
                         <motion.li key={item.label} className="relative">
                             <motion.div
@@ -146,6 +157,7 @@ function NavBar(): React.JSX.Element {
                                     </Link>
                                 </motion.div>
 
+
                                 {/* Back-facing nav item */}
                                 <motion.div
                                     className="absolute inset-0 z-10"
@@ -165,18 +177,28 @@ function NavBar(): React.JSX.Element {
                                         <span className="font-medium">{item.label}</span>
                                     </Link>
                                 </motion.div>
+
                             </motion.div>
                         </motion.li>
                     ))}
+                    <ModeToggle></ModeToggle>
+
                 </ul>
 
-                {/* Mobile toggle */}
-                <button
-                    onClick={() => setIsOpen(!isOpen)}
-                    className="md:hidden p-2 rounded-lg text-gray-600 dark:text-gray-300 focus:outline-none"
-                >
-                    {isOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
+                <div className="flex items-center gap-4">
+                    <div className=" md:hidden">
+                        <ModeToggle></ModeToggle>
+                    </div>
+                    {/* Mobile toggle */}
+                    <button
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="md:hidden p-2 rounded-lg text-gray-600 dark:text-gray-300 focus:outline-none"
+                    >
+                        {isOpen ? <X size={24} /> : <Menu size={24} />}
+                    </button>
+
+                </div>
+
             </div>
 
             {/* Mobile nav dropdown */}
@@ -186,6 +208,7 @@ function NavBar(): React.JSX.Element {
                 transition={{ duration: 0.3 }}
                 className="md:hidden flex flex-col items-center gap-4 mt-4 overflow-hidden"
             >
+
                 {navItems.map((item) => (
                     <Link
                         key={item.label}
@@ -195,6 +218,7 @@ function NavBar(): React.JSX.Element {
                         {item.label}
                     </Link>
                 ))}
+
             </motion.ul>
         </motion.nav>
     );

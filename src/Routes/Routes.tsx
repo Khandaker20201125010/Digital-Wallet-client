@@ -2,9 +2,9 @@
 import Main from "@/Layouts/Main";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
-
 import FAQ from "@/pages/FAQ";
-import Features from "@/pages/features";
+import Features from "@/pages/Features";
+
 
 
 
