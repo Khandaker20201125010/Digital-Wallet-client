@@ -4,7 +4,7 @@ import type { Variants } from "framer-motion";
 import { Home, Settings, Bell, User, Menu, X } from "lucide-react";
 import { Link } from "react-router";
 import { ModeToggle } from "@/Layouts/mode-toggle";
-
+import logo from "../assets/images/logo.png"
 interface NavItem {
     icon: React.ReactNode;
     label: string;
@@ -115,13 +115,23 @@ function NavBar(): React.JSX.Element {
             {/* Top bar (logo + nav + toggle) */}
             <div className="flex items-center justify-between relative z-10">
                 {/* Brand */}
-                <Link to="/" className="text-xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent dark:text-gray-200">
-                    NexusPay
+                <Link
+                    to="/"
+                    className="flex items-center"
+                >
+                    <img
+                        className="w-12 h-12"
+                        src={logo}
+                        alt="WaveFunds Logo"
+                    />
+                    <h1 className="text-xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                        WaveFunds
+                    </h1>
                 </Link>
 
 
                 {/* Desktop nav */}
-               <ul className="hidden md:flex items-center gap-4 lg:gap-8 xl:gap-10">
+                <ul className="hidden md:flex items-center gap-4 lg:gap-8 xl:gap-10">
 
                     {navItems.map((item) => (
                         <motion.li key={item.label} className="relative">
