@@ -19,9 +19,7 @@ const Banner = () => {
                     </h1>
 
                     <p className="mt-6 text-gray-600 dark:text-gray-400 text-sm md:text-base leading-relaxed max-w-md mx-auto md:mx-0">
-                        Lorem ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text
-                        ever since the 1500s.
+                       WaveFounds is a cutting-edge digital wallet designed to simplify your online transactions. With top-notch security and user-friendly features, managing your finances has never been easier.
                     </p>
                     <button className="max-sm:w-full mt-6 px-6 py-3 relative inline-block rounded-full   text-white dark:text-white  text-base font-bold border-2 border-purple-500 overflow-hidden bg-black z-10 cursor-pointer font-sans group">
                         {/* Background sliding effect */}
@@ -36,15 +34,15 @@ const Banner = () => {
                         <div className="flex -space-x-3">
                             <img
                                 src="https://randomuser.me/api/portraits/women/1.jpg"
-                                className="w-10 h-10 rounded-full border-2 border-white dark:border-[#0B0C10]"
+                                className="w-10 h-10 rounded-full border-2 border-purple-500 dark:border-[#0B0C10]"
                             />
                             <img
                                 src="https://randomuser.me/api/portraits/men/2.jpg"
-                                className="w-10 h-10 rounded-full border-2 border-white dark:border-[#0B0C10]"
+                                className="w-10 h-10 rounded-full border-2 border-purple-500 dark:border-[#0B0C10]"
                             />
                             <img
                                 src="https://randomuser.me/api/portraits/women/3.jpg"
-                                className="w-10 h-10 rounded-full border-2 border-white dark:border-[#0B0C10]"
+                                className="w-10 h-10 rounded-full border-2 border-purple-500 dark:border-[#0B0C10]"
                             />
                             <h1 className="w-10 h-10 rounded-full border border-black text-sm bg-white p-2 font-semibold dark:border-[#0B0C10]" >
                                 <CountUp end={5} duration={2} separator="," />k+
