@@ -112,18 +112,22 @@ function NavBar(): React.JSX.Element {
         variants={navGlowVariants}
       />
 
-      {/* Top bar (logo + nav + toggle) */}
-      <div className="relative z-10 flex items-center justify-between">
+      {/* Top bar: logo + nav + toggle */}
+      <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 md:gap-0">
         {/* Brand */}
-        <Link to="/" className="flex items-center">
-          <img className="h-12 w-12" src={logo} alt="WaveFunds Logo" />
-          <h1 className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-xl font-bold text-transparent">
+        <Link to="/" className="flex items-center gap-2">
+          <img
+            className="h-10 w-10 sm:h-12 sm:w-12"
+            src={logo}
+            alt="WaveFunds Logo"
+          />
+          <h1 className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-lg font-bold text-transparent sm:text-xl">
             WaveFunds
           </h1>
         </Link>
 
         {/* Desktop nav */}
-        <ul className="hidden items-center gap-4 md:flex lg:gap-8 xl:gap-10">
+        <ul className="hidden flex-wrap items-center gap-4 md:flex lg:gap-8 xl:gap-10">
           {navItems.map((item) => (
             <motion.li key={item.label} className="relative">
               <motion.div
@@ -151,7 +155,7 @@ function NavBar(): React.JSX.Element {
                 >
                   <Link
                     to={item.path}
-                    className={`group flex items-center gap-2 rounded-xl px-4 py-2 text-gray-600 transition-colors dark:text-gray-300 ${item.iconColor}`}
+                    className={`group flex items-center gap-2 rounded-xl px-3 py-2 text-sm text-gray-600 transition-colors sm:px-4 sm:text-base dark:text-gray-300 ${item.iconColor}`}
                   >
                     <span>{item.icon}</span>
                     <span className="font-medium">{item.label}</span>
@@ -171,7 +175,7 @@ function NavBar(): React.JSX.Element {
                 >
                   <Link
                     to={item.path}
-                    className={`group flex items-center gap-2 rounded-xl px-4 py-2 text-gray-600 transition-colors dark:text-gray-300 ${item.iconColor}`}
+                    className={`group flex items-center gap-2 rounded-xl px-3 py-2 text-sm text-gray-600 transition-colors sm:px-4 sm:text-base dark:text-gray-300 ${item.iconColor}`}
                   >
                     <span>{item.icon}</span>
                     <span className="font-medium">{item.label}</span>
@@ -180,17 +184,15 @@ function NavBar(): React.JSX.Element {
               </motion.div>
             </motion.li>
           ))}
-          <ModeToggle></ModeToggle>
+          <ModeToggle />
         </ul>
 
-        <div className="flex items-center gap-4">
-          <div className="md:hidden">
-            <ModeToggle></ModeToggle>
-          </div>
-          {/* Mobile toggle */}
+        {/* Mobile controls */}
+        <div className="flex items-center gap-2 md:hidden">
+          <ModeToggle />
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="rounded-lg p-2 text-gray-600 focus:outline-none md:hidden dark:text-gray-300"
+            className="rounded-lg p-2 text-gray-600 focus:outline-none dark:text-gray-300"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -204,13 +206,13 @@ function NavBar(): React.JSX.Element {
           isOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }
         }
         transition={{ duration: 0.3 }}
-        className="mt-4 flex flex-col items-center gap-4 overflow-hidden md:hidden"
+        className="mt-3 flex flex-col items-center gap-3 overflow-hidden md:hidden"
       >
         {navItems.map((item) => (
           <Link
             key={item.label}
             to={item.path}
-            className="w-full rounded-xl px-4 py-2 text-center text-gray-600 dark:text-gray-300"
+            className="w-full rounded-xl px-4 py-2 text-center text-sm text-gray-600 sm:text-base dark:text-gray-300"
           >
             {item.label}
           </Link>
