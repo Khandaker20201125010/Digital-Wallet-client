@@ -1,7 +1,6 @@
-
-
-import logo from "../assets/images/logo.png"
-const GitHubIcon = ({ size = 24, className = "" }) => (
+import logo from '../assets/images/logo.png';
+import googleicon from '../assets/google-play-svgrepo-com.svg';
+const GitHubIcon = ({ size = 24, className = '' }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -14,7 +13,7 @@ const GitHubIcon = ({ size = 24, className = "" }) => (
   </svg>
 );
 
-const TwitterIcon = ({ size = 24, className = "" }) => (
+const TwitterIcon = ({ size = 24, className = '' }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -27,7 +26,7 @@ const TwitterIcon = ({ size = 24, className = "" }) => (
   </svg>
 );
 
-const LinkedInIcon = ({ size = 24, className = "" }) => (
+const LinkedInIcon = ({ size = 24, className = '' }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -42,134 +41,41 @@ const LinkedInIcon = ({ size = 24, className = "" }) => (
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-900 dark:to-black text-gray-900 dark:text-white py-12 px-4 font-inter border-t border-gray-200 dark:border-gray-800">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+    <footer className="font-inter border-t border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100 px-4 py-12 text-gray-900 dark:border-gray-800 dark:from-gray-900 dark:to-black dark:text-white">
+      <div className="container mx-auto grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
         <div className="space-y-4">
-          <div className="flex items-center ">
-           <img className="w-16 h-16" src={logo} alt="WaveFunds" />
-            <h3 className="text-3xl font-extrabold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+          <div className="flex items-center">
+            <img className="h-16 w-16" src={logo} alt="WaveFunds" />
+            <h3 className="bg-gradient-to-r from-purple-500 via-purple-500 to-pink-500 bg-clip-text text-3xl font-extrabold text-transparent">
               WaveFunds
             </h3>
           </div>
-          <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+          <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300">
             Innovating for a better tomorrow. We are committed to delivering
             high-quality solutions that empower businesses and individuals.
           </p>
           <div className="flex space-x-5 pt-2">
             <a
               href="#"
-              className="text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-teal-400 transition-transform transform hover:scale-110"
+              className="transform text-gray-500 transition-transform hover:scale-110 hover:text-purple-600 dark:text-gray-400 dark:hover:text-teal-400"
             >
               <GitHubIcon size={28} />
             </a>
             <a
               href="#"
-              className="text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-teal-400 transition-transform transform hover:scale-110"
+              className="transform text-gray-500 transition-transform hover:scale-110 hover:text-purple-600 dark:text-gray-400 dark:hover:text-teal-400"
             >
               <TwitterIcon size={28} />
             </a>
             <a
               href="#"
-              className="text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-teal-400 transition-transform transform hover:scale-110"
+              className="transform text-gray-500 transition-transform hover:scale-110 hover:text-purple-600 dark:text-gray-400 dark:hover:text-teal-400"
             >
               <LinkedInIcon size={28} />
             </a>
           </div>
         </div>
-        <div className="space-y-4">
-          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-            Quick Links
-          </h3>
-          <ul className="space-y-3">
-            <li>
-              <a
-                href="#"
-                className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-teal-400 transition-colors duration-300"
-              >
-                Home
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-teal-400 transition-colors duration-300"
-              >
-                About Us
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-teal-400 transition-colors duration-300"
-              >
-                Services
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-teal-400 transition-colors duration-300"
-              >
-                Portfolio
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-teal-400 transition-colors duration-300"
-              >
-                Blog
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div className="space-y-4">
-          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-            Resources
-          </h3>
-          <ul className="space-y-3">
-            <li>
-              <a
-                href="#"
-                className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-teal-400 transition-colors duration-300"
-              >
-                Support
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-teal-400 transition-colors duration-300"
-              >
-                FAQs
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-teal-400 transition-colors duration-300"
-              >
-                Privacy Policy
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-teal-400 transition-colors duration-300"
-              >
-                Terms of Service
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-teal-400 transition-colors duration-300"
-              >
-                Careers
-              </a>
-            </li>
-          </ul>
-        </div>
+
         <div className="space-y-4">
           <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
             Contact Us
@@ -184,8 +90,53 @@ const Footer = () => {
             Phone: +1 (555) 123-4567
           </p>
         </div>
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 uppercase dark:text-gray-100">
+            Download the app
+          </h1>
+          <p className="mt-5 text-gray-600 dark:text-gray-300">
+            We suggest connecting to the apps you use for work
+          </p>
+          <div className="mt-5 flex flex-col space-x-4 md:flex-row">
+            <div className="flex gap-4">
+              {/* App Store Button */}
+              <a
+                href="#"
+                className="flex items-center gap-2 rounded-lg border border-purple-400 bg-gradient-to-r from-purple-900/40 to-purple-400/40 px-4 py-3 text-black transition-all duration-300 hover:scale-105 hover:from-purple-900 hover:to-purple-950 hover:text-white dark:text-white"
+              >
+                {/* Apple Logo */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M16.365 1.43c-.892.052-1.942.587-2.578 1.3-.565.64-1.046 1.707-.863 2.692.927.07 1.898-.474 2.507-1.204.58-.698 1.003-1.67.934-2.659zM20.08 17.1c-.401.89-.598 1.29-1.118 2.08-.726 1.08-1.751 2.425-3.018 2.437-1.127.01-1.417-.716-2.95-.707-1.532.01-1.856.722-2.983.711-1.267-.012-2.234-1.23-2.96-2.31-2.027-3.017-2.24-6.553-1-8.427.887-1.373 2.278-2.183 3.591-2.183 1.34 0 2.186.741 3.295.741 1.076 0 1.729-.744 3.292-.744 1.175 0 2.417.643 3.304 1.75-2.9 1.588-2.428 5.737.547 7.352z" />
+                </svg>
+                <span className="text-left">
+                  <p className="text-xs">Download on the</p>
+                  <p className="text-sm font-semibold">App Store</p>
+                </span>
+              </a>
+
+              {/* Google Play Button */}
+              <a
+                href="#"
+                className="flex items-center gap-2 rounded-lg border border-purple-400 bg-gradient-to-r from-purple-900/60 to-pink-400/30 px-4 py-3 text-black transition-all duration-300 hover:scale-105 hover:from-purple-950/50 hover:to-pink-950/50 hover:text-white dark:text-white"
+              >
+                {/* Google Play Icon */}
+                <img className="h-6 w-6" src={googleicon} alt="" />
+                <span className="text-left">
+                  <p className="text-xs">GET IT ON</p>
+                  <p className="text-sm font-semibold">Google Play</p>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="text-center text-gray-500 dark:text-gray-400 text-sm pt-10 mt-10 border-t border-gray-200 dark:border-gray-700">
+
+      <div className="mt-10 border-t border-gray-200 pt-10 text-center text-sm text-gray-500 dark:border-gray-700 dark:text-gray-400">
         <p>
           &copy; {new Date().getFullYear()} Your Brand. All rights reserved.
         </p>
