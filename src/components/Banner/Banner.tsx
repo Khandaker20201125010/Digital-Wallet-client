@@ -58,7 +58,7 @@ const Banner = () => {
               Over{' '}
               <span className="font-bold text-gray-900 dark:text-white">
                 {' '}
-                <CountUp end={5000} duration={2} separator="," />+
+                <CountUp end={5000} duration={4} separator="," />+
               </span>{' '}
               Reviews
             </span>
@@ -90,7 +90,7 @@ const Banner = () => {
           <div className="flex-1">
             <h2 className="text-3xl font-bold text-gray-900 max-sm:text-xl dark:text-white">
               {' '}
-              <CountUp end={93} duration={2} separator="," />+
+              <CountUp end={93} duration={4} separator="," />+
             </h2>
             <p className="text-gray-600 max-sm:text-sm dark:text-gray-400">
               Satisfied user
@@ -99,7 +99,7 @@ const Banner = () => {
           <div className="flex-1">
             <h2 className="text-3xl font-bold text-gray-900 max-sm:text-xl dark:text-white">
               {' '}
-              <CountUp end={4.9} duration={2} decimals={1} />
+              <CountUp start={1} end={4.9} duration={5} decimals={1} />
               /5
             </h2>
             <p className="text-gray-600 max-sm:text-sm dark:text-gray-400">
@@ -109,9 +109,9 @@ const Banner = () => {
           <div className="flex-1">
             <h2 className="text-3xl font-bold text-gray-900 max-sm:text-xl dark:text-white">
               {' '}
-              <CountUp end={99} duration={2} separator="," />
+              <CountUp end={99} duration={4} separator="," />%
             </h2>
-            <p className="text-gray-600 max-sm:text-sm dark:text-gray-400">
+            <p className="text-gray-600 w-full max-sm:text-sm dark:text-gray-400">
               Secure Payments
             </p>
           </div>

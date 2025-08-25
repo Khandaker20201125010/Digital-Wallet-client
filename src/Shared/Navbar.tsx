@@ -115,7 +115,7 @@ function NavBar(): React.JSX.Element {
       {/* Top bar: logo + nav + toggle */}
       <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 md:gap-0">
         {/* Brand */}
-        <Link to="/" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center">
           <img
             className="h-10 w-10 sm:h-12 sm:w-12"
             src={logo}
@@ -184,12 +184,27 @@ function NavBar(): React.JSX.Element {
               </motion.div>
             </motion.li>
           ))}
-          <ModeToggle />
+
+          {/* Mode Toggle */}
+          <li>
+            <ModeToggle />
+          </li>
+
+          {/* Register Button */}
+          <li>
+            <Link to="/login" className="relative z-10">
+              <button className="group relative z-10 cursor-pointer overflow-hidden rounded-full border-2 border-purple-500 bg-gradient-to-r from-blue-700 via-purple-500 to-pink-500 px-6 py-1.5 font-sans text-xs font-bold text-white transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/30 sm:px-8 sm:py-2 sm:text-sm md:px-10 md:py-2.5 md:text-base">
+                <span className="absolute inset-0 z-0 -translate-x-full bg-gradient-to-r from-blue-950 via-purple-950 to-blue-950 transition-transform duration-300 ease-in-out group-hover:translate-x-0"></span>
+                <span className="relative">Login</span>
+              </button>
+            </Link>
+          </li>
         </ul>
 
         {/* Mobile controls */}
         <div className="flex items-center gap-2 md:hidden">
           <ModeToggle />
+
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="rounded-lg p-2 text-gray-600 focus:outline-none dark:text-gray-300"

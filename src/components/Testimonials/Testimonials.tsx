@@ -1,3 +1,4 @@
+import CountUp from 'react-countup';
 import { FaStar, FaQuoteRight } from 'react-icons/fa';
 
 const testimonials = [
@@ -50,24 +51,33 @@ const Testimonials = () => {
           {/* Stats */}
           <div className="flex flex-wrap gap-8">
             <div>
-              <p className="text-3xl font-bold">93k+</p>
+              <p className="text-3xl font-bold">
+                {' '}
+                <CountUp end={93} duration={2} separator="," />+
+              </p>
               <p className="text-gray-400">Satisfied user</p>
             </div>
             <div>
-              <p className="text-3xl font-bold">4.9/5</p>
+              <p className="text-3xl font-bold">
+                {' '}
+                <CountUp start={1} end={4.9} duration={2} decimals={1} />
+                /5
+              </p>
               <p className="text-gray-400">Client Rating</p>
             </div>
             <div>
-              <p className="text-3xl font-bold">100k+</p>
+              <p className="text-3xl font-bold">    <CountUp end={100} duration={2} separator="," />+</p>
               <p className="text-gray-400">App Download</p>
             </div>
           </div>
         </div>
 
         {/* Right Testimonials */}
-        <div  className="flex flex-col gap-8">
+        <div className="flex flex-col gap-8">
           {testimonials.map((t, i) => (
-            <div data-aos="fade-up" data-aos-duration="1500"
+            <div
+              data-aos="fade-up"
+              data-aos-duration="1500"
               key={i}
               className={`relative rounded-xl ${t.gradient} transform p-6 shadow-lg ${t.style} text-white`}
             >

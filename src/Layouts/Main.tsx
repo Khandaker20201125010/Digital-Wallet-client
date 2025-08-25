@@ -1,18 +1,22 @@
 import Footer from '@/Shared/Footer';
 import Navbar from '@/Shared/Navbar';
 
-import { Outlet } from 'react-router';
+import { Outlet, useLocation } from 'react-router';
 
 const Main = () => {
+  const location = useLocation();
+  const hideNavbarFooter = ['/login', '/register'].includes(location.pathname);
   return (
-    <div className="max-w-[1440px] mx-auto ">
-      <Navbar></Navbar>
+    <div className="mx-auto max-w-[1440px] font-poppins">
+      {!hideNavbarFooter && <Navbar />}
       <div className="min-h-[calc(100vh-136px)]">
-        <Outlet></Outlet>
+        <Outlet />
       </div>
-      <div className="mt-20">
-        <Footer></Footer>
-      </div>
+      {!hideNavbarFooter && (
+        <div className="mt-20">
+          <Footer />
+        </div>
+      )}
     </div>
   );
 };

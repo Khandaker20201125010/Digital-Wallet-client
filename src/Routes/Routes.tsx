@@ -5,6 +5,10 @@ import FAQ from '@/pages/FAQ';
 import Features from '@/pages/Features';
 
 import Home from '@/pages/Home';
+import Login from '@/pages/Login';
+import Register from '@/pages/Register';
+import Verify from '@/pages/Verify';
+import Error from '@/utils/Error';
 import ScrollToTop from '@/utils/ScrollToTop';
 import { createBrowserRouter } from 'react-router';
 
@@ -17,6 +21,7 @@ export const router = createBrowserRouter([
       </>
     ),
     path: '/',
+    errorElement: <Error />,
 
     children: [
       {
@@ -38,6 +43,18 @@ export const router = createBrowserRouter([
       {
         path: '/faq',
         Component: FAQ,
+      },
+      {
+        path: '/login',
+        Component: Login,
+      },
+      {
+        path: '/register',
+        Component: Register,
+      },
+      {
+        path: '/verify',
+        Component: Verify,
       },
     ],
   },

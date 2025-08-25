@@ -75,13 +75,13 @@ const Steps = () => {
         <div className="flex flex-wrap gap-3 pt-3 sm:gap-4 sm:pt-4">
           <button className="group relative z-10 mt-4 inline-block cursor-pointer overflow-hidden rounded-full border-2 border-purple-500 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 px-4 py-2 font-sans text-xs font-bold text-white max-sm:w-full sm:mt-5 sm:px-5 sm:py-2.5 sm:text-sm md:px-6 md:py-3 md:text-base dark:text-white">
             <span className="absolute inset-0 z-[-1] -translate-x-full bg-gradient-to-r from-blue-950 via-purple-950 to-blue-950 transition-transform duration-300 ease-in-out group-hover:translate-x-0"></span>
-            <Link to="/features">
+            <Link to="/register">
               <span className="relative"> Register Now</span>
             </Link>
           </button>
           <button className="group relative z-10 mt-4 inline-block cursor-pointer overflow-hidden rounded-full border-2 border-purple-500 bg-gradient-to-r from-blue-950 via-purple-950 to-blue-950 px-4 py-2 font-sans text-xs font-bold text-white max-sm:w-full sm:mt-5 sm:px-5 sm:py-2.5 sm:text-sm md:px-6 md:py-3 md:text-base dark:text-white">
             <span className="absolute inset-0 z-[-1] translate-x-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-transform duration-300 ease-in-out group-hover:translate-x-0"></span>
-            <Link to="/features">
+            <Link to="/login">
               <span className="relative"> Get Started</span>
             </Link>
           </button>
