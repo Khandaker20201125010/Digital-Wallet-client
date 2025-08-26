@@ -37,6 +37,7 @@ const registerSchema = z
 
 import React from 'react';
 import { Input } from '@/components/ui/input';
+import config from '@/config';
 
 interface RegisterFormProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -169,10 +170,11 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ className, ...props }) => {
           </span>
         </div>
 
-    
         <button
+          onClick={() =>
+            window.location.assign(`${config.baseUrl}/auth/google`)
+          }
           type="button"
-          
           className="group relative z-10 w-full cursor-pointer overflow-hidden rounded-full border-2 border-purple-500 bg-gradient-to-r from-blue-700 via-purple-500 to-pink-500 px-6 py-1.5 font-sans text-xs font-bold text-white transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/30 sm:px-8 sm:py-2 sm:text-sm md:px-10 md:py-2.5 md:text-base"
         >
           <span className="absolute inset-0 z-0 translate-x-full bg-gradient-to-r from-blue-950 via-purple-950 to-blue-950 transition-transform duration-300 ease-in-out group-hover:translate-x-0"></span>
@@ -183,7 +185,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ className, ...props }) => {
 
       <div className="text-center text-sm">
         Already have an account?{' '}
-        <Link to="/login" className="underline underline-offset-4">
+        <Link to="/login" className="underline underline-offset-4 text-pink-500">
           Login
         </Link>
       </div>

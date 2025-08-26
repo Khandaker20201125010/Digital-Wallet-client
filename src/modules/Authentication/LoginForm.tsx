@@ -1,4 +1,3 @@
-
 import {
   Form,
   FormControl,
@@ -8,6 +7,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import config from '@/config';
 import { cn } from '@/lib/utils';
 import { useLoginMutation } from '@/redux/features/auth/auth.api';
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
@@ -27,13 +27,20 @@ export function LoginForm({
     try {
       const res = await login(data).unwrap();
       console.log(res);
-    } catch (err) {
-      const error = err as FetchBaseQueryError;
 
-      if (error.status === 401) {
+      // Check if user is verified
+      if (res.data.user && !res.data.user.isVerified) {
         toast.error('Your account is not verified');
         navigate('/verify', { state: data.email });
+        return;
       }
+
+      // Otherwise, proceed to dashboard
+      navigate('/');
+    } catch (err) {
+      const error = err as FetchBaseQueryError;
+      toast.error('Login failed');
+      console.log(error);
     }
   };
 
@@ -103,6 +110,9 @@ export function LoginForm({
         </div>
 
         <button
+          onClick={() =>
+            window.location.assign(`${config.baseUrl}/auth/google`)
+          }
           type="button"
           className="group relative z-10 w-full cursor-pointer overflow-hidden rounded-full border-2 border-purple-500 bg-gradient-to-r from-blue-700 via-purple-500 to-pink-500 px-6 py-1.5 font-sans text-xs font-bold text-white transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/30 sm:px-8 sm:py-2 sm:text-sm md:px-10 md:py-2.5 md:text-base"
         >
@@ -113,7 +123,7 @@ export function LoginForm({
       </div>
       <div className="text-center text-sm">
         Don&apos;t have an account?{' '}
-        <Link to="/register" replace className="underline underline-offset-4">
+        <Link to="/register" replace className="underline underline-offset-4 text-pink-500">
           Register
         </Link>
       </div>
