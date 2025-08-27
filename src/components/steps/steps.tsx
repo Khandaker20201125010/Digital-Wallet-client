@@ -91,7 +91,8 @@ const Steps = () => {
       {/* Right Section */}
       <div className="relative mt-8 flex justify-center md:mt-0 md:w-3/5">
         {/* Solid Ball + Glow Lighting */}
-        <div className="absolute top-5 right-[20px] -z-10 sm:top-8 sm:right-[30px] md:top-10 md:right-[25px] lg:right-[50px]">
+        <div   data-aos="zoom-in"
+          data-aos-duration="1500" className="absolute top-5 right-[20px] -z-10 sm:top-8 sm:right-[30px] md:top-10 md:right-[25px] lg:right-[50px]">
           {/* Glow / Lighting */}
           <div className="absolute top-8 right-8 h-[180px] w-[180px] rounded-full bg-purple-500 opacity-50 blur-[80px] sm:top-10 sm:right-10 sm:h-[250px] sm:w-[250px] sm:blur-[100px] md:h-[280px] md:w-[280px] md:blur-[120px] lg:h-[450px] lg:w-[450px] lg:blur-[180px]" />
 

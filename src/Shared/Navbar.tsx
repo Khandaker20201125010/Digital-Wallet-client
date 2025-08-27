@@ -5,6 +5,12 @@ import { Home, Settings, Bell, User, Menu, X } from 'lucide-react';
 import { Link } from 'react-router';
 import { ModeToggle } from '@/Layouts/mode-toggle';
 import logo from '../assets/images/logo.png';
+import {
+  authApi,
+  useLogoutMutation,
+  useUserInfoQuery,
+} from '@/redux/features/auth/auth.api';
+import { useAppDispatch } from '@/redux/hooks';
 interface NavItem {
   icon: React.ReactNode;
   label: string;
@@ -96,6 +102,15 @@ const sharedTransition = {
 
 function NavBar(): React.JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
+  const { data } = useUserInfoQuery(undefined);
+  const [logout] = useLogoutMutation();
+  const dispatch = useAppDispatch();
+  console.log('User data:', data);
+
+  const handleLogout = async () => {
+    await logout(undefined);
+    dispatch(authApi.util.resetApiState());
+  };
   return (
     <motion.nav
       className="sticky top-0 z-50 w-full overflow-hidden border-b border-gray-200/60 bg-white/70 p-3 shadow-md backdrop-blur-lg dark:border-gray-800/60 dark:bg-black/70"
@@ -192,12 +207,24 @@ function NavBar(): React.JSX.Element {
 
           {/* Register Button */}
           <li>
-            <Link to="/login" className="relative z-10">
-              <button className="group relative z-10 cursor-pointer overflow-hidden rounded-full border-2 border-purple-500 bg-gradient-to-r from-blue-700 via-purple-500 to-pink-500 px-6 py-1.5 font-sans text-xs font-bold text-white transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/30 sm:px-8 sm:py-2 sm:text-sm md:px-10 md:py-2.5 md:text-base">
+            {data?.data?.email ? (
+              // User is logged in - show Logout button
+              <button
+                onClick={handleLogout}
+                className="group relative z-10 cursor-pointer overflow-hidden rounded-full border-2 border-purple-500 bg-gradient-to-r from-blue-700 via-purple-500 to-pink-500 px-6 py-1.5 font-sans text-xs font-bold text-white transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/30 sm:px-8 sm:py-2 sm:text-sm md:px-10 md:py-2.5 md:text-base"
+              >
                 <span className="absolute inset-0 z-0 -translate-x-full bg-gradient-to-r from-blue-950 via-purple-950 to-blue-950 transition-transform duration-300 ease-in-out group-hover:translate-x-0"></span>
-                <span className="relative">Login</span>
+                <span className="relative">Logout</span>
               </button>
-            </Link>
+            ) : (
+              // User is not logged in or data is loading - show Login button
+              <Link to="/login" className="relative z-10">
+                <button className="group relative z-10 cursor-pointer overflow-hidden rounded-full border-2 border-purple-500 bg-gradient-to-r from-blue-700 via-purple-500 to-pink-500 px-6 py-1.5 font-sans text-xs font-bold text-white transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/30 sm:px-8 sm:py-2 sm:text-sm md:px-10 md:py-2.5 md:text-base">
+                  <span className="absolute inset-0 z-0 -translate-x-full bg-gradient-to-r from-blue-950 via-purple-950 to-blue-950 transition-transform duration-300 ease-in-out group-hover:translate-x-0"></span>
+                  <span className="relative">Login</span>
+                </button>
+              </Link>
+            )}
           </li>
         </ul>
 

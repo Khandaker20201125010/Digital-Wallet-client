@@ -14,7 +14,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useNavigate } from 'react-router';
 import Password from '@/components/Password';
 import { toast } from 'sonner';
-import { useRegisterMutation } from '@/redux/features/auth/auth.api';
+import {
+  useCheckUserExistsMutation,
+  useRegisterMutation,
+  useUserInfoQuery,
+} from '@/redux/features/auth/auth.api';
 
 const registerSchema = z
   .object({
@@ -29,15 +33,17 @@ const registerSchema = z
     confirmPassword: z
       .string()
       .min(8, { error: 'Confirm Password is too short' }),
+    role: z.enum(['USER', 'AGENT']),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: 'Password do not match',
     path: ['confirmPassword'],
   });
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import config from '@/config';
+import RoleModal from '@/components/ui/RoleModal';
 
 interface RegisterFormProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -46,6 +52,11 @@ interface RegisterFormProps extends React.HTMLAttributes<HTMLDivElement> {
 const RegisterForm: React.FC<RegisterFormProps> = ({ className, ...props }) => {
   const [register] = useRegisterMutation();
   const navigate = useNavigate();
+
+  const [openRoleModal, setOpenRoleModal] = useState(false);
+  const [isCheckingUser, setIsCheckingUser] = useState(false);
+
+
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -53,25 +64,38 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ className, ...props }) => {
       email: '',
       password: '',
       confirmPassword: '',
+      role: 'USER',
     },
   });
 
+  
   const onSubmit = async (data: z.infer<typeof registerSchema>) => {
     const userInfo = {
       name: data.name,
       email: data.email,
       password: data.password,
+      role: data.role,
     };
 
     try {
       const result = await register(userInfo).unwrap();
       console.log(result);
       toast.success('User created successfully');
-      navigate('/verify');
+      navigate('/verify', { state: data.email });
     } catch (error) {
       console.error(error);
     }
   };
+
+const handleGoogleClick = () => {
+  window.location.assign(`${config.baseUrl}/auth/google`);
+};
+
+
+
+
+
+
 
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
@@ -117,6 +141,27 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ className, ...props }) => {
                   <FormDescription className="sr-only">
                     This is your public display name.
                   </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="role"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Select Role as User/Agent</FormLabel>
+                  <FormControl>
+                    <select
+                      {...field}
+                      value={field.value || 'USER'}
+                      onChange={(e) => field.onChange(e.target.value)}
+                      className="w-full rounded border px-2 py-1"
+                    >
+                      <option value="USER">User</option>
+                      <option value="AGENT">Agent</option>
+                    </select>
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
@@ -171,24 +216,29 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ className, ...props }) => {
         </div>
 
         <button
-          onClick={() =>
-            window.location.assign(`${config.baseUrl}/auth/google`)
-          }
+          onClick={handleGoogleClick}
+          disabled={isCheckingUser}
           type="button"
           className="group relative z-10 w-full cursor-pointer overflow-hidden rounded-full border-2 border-purple-500 bg-gradient-to-r from-blue-700 via-purple-500 to-pink-500 px-6 py-1.5 font-sans text-xs font-bold text-white transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/30 sm:px-8 sm:py-2 sm:text-sm md:px-10 md:py-2.5 md:text-base"
         >
           <span className="absolute inset-0 z-0 translate-x-full bg-gradient-to-r from-blue-950 via-purple-950 to-blue-950 transition-transform duration-300 ease-in-out group-hover:translate-x-0"></span>
 
-          <span className="relative">Login with Google</span>
+          <span className="relative">
+            {isCheckingUser ? 'Checking...' : 'Login with Google'}
+          </span>
         </button>
       </div>
 
       <div className="text-center text-sm">
         Already have an account?{' '}
-        <Link to="/login" className="underline underline-offset-4 text-pink-500">
+        <Link
+          to="/login"
+          className="text-pink-500 underline underline-offset-4"
+        >
           Login
         </Link>
       </div>
+  
     </div>
   );
 };

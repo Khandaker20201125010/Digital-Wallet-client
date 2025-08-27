@@ -7,14 +7,16 @@ import Features from '@/pages/Features';
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';
 import Register from '@/pages/Register';
+import RoleSelectionPage from '@/pages/RoleSelectionPage';
 import Verify from '@/pages/Verify';
 import Error from '@/utils/Error';
+
 import ScrollToTop from '@/utils/ScrollToTop';
 import { createBrowserRouter } from 'react-router';
 
 export const router = createBrowserRouter([
   {
-     Component: () => (
+    Component: () => (
       <>
         <ScrollToTop />
         <Main />
@@ -55,6 +57,10 @@ export const router = createBrowserRouter([
       {
         path: '/verify',
         Component: Verify,
+      },
+      {
+        path: '/select-role',
+        element: <RoleSelectionPage />,
       },
     ],
   },

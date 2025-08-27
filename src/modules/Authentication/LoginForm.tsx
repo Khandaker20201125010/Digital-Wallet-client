@@ -7,10 +7,12 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import RoleModal from '@/components/ui/RoleModal';
 import config from '@/config';
 import { cn } from '@/lib/utils';
 import { useLoginMutation } from '@/redux/features/auth/auth.api';
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import type { FieldValues, SubmitHandler } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router';
@@ -42,6 +44,10 @@ export function LoginForm({
       toast.error('Login failed');
       console.log(error);
     }
+  };
+
+  const handleGoogleClick = () => {
+    window.location.assign(`${config.baseUrl}/auth/google`);
   };
 
   return (
@@ -110,9 +116,7 @@ export function LoginForm({
         </div>
 
         <button
-          onClick={() =>
-            window.location.assign(`${config.baseUrl}/auth/google`)
-          }
+          onClick={handleGoogleClick}
           type="button"
           className="group relative z-10 w-full cursor-pointer overflow-hidden rounded-full border-2 border-purple-500 bg-gradient-to-r from-blue-700 via-purple-500 to-pink-500 px-6 py-1.5 font-sans text-xs font-bold text-white transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/30 sm:px-8 sm:py-2 sm:text-sm md:px-10 md:py-2.5 md:text-base"
         >
@@ -123,7 +127,11 @@ export function LoginForm({
       </div>
       <div className="text-center text-sm">
         Don&apos;t have an account?{' '}
-        <Link to="/register" replace className="underline underline-offset-4 text-pink-500">
+        <Link
+          to="/register"
+          replace
+          className="text-pink-500 underline underline-offset-4"
+        >
           Register
         </Link>
       </div>

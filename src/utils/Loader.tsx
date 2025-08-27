@@ -1,30 +1,29 @@
-import logo from "../assets/images/logo.png";
+import logo from '../assets/images/logo.png';
 const Loader = () => {
   return (
-  <div className="flex items-center justify-center min-h-screen">
-  <div className="relative w-64 h-64"> {/* Bigger size */}
-    {/* Center logo */}
-    <div className="absolute inset-0 flex items-center justify-center">
-      <div className="w-20 h-20 rounded-full bg-gradient-to-r from-purple-600 to-blue-500 flex items-center justify-center shadow-lg">
-        <img src={logo} alt="Logo" className="w-12 h-12" />
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="relative h-64 w-64">
+        {' '}
+        {/* Bigger size */}
+        {/* Center logo */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-blue-500 shadow-lg">
+            <img src={logo} alt="Logo" className="h-12 w-12" />
+          </div>
+        </div>
+        {/* Orbit path */}
+        <div className="animate-spin-slow absolute inset-0 rounded-full border-2 border-dashed border-gray-600"></div>
+        {/* Orbiting elements */}
+        <div className="animate-spin-slow absolute h-full w-full">
+          {/* Circle */}
+          <div className="absolute -top-2 left-1/2 h-8 w-8 -translate-x-1/2 rounded-full bg-gradient-to-r from-pink-500 to-purple-400"></div>
+          {/* Diamond */}
+          <div className="absolute top-1/2 -right-2 h-8 w-8 -translate-y-1/2 rotate-45 bg-gradient-to-r from-purple-500 to-pink-400"></div>
+          {/* Triangle */}
+          <div className="absolute -bottom-5 left-1/2 h-0 w-0 -translate-x-1/2 border-t-[36px] border-r-[20px] border-l-[20px] border-t-purple-400 border-r-transparent border-l-transparent"></div>
+        </div>
       </div>
     </div>
-
-    {/* Orbit path */}
-    <div className="absolute inset-0 rounded-full border-2 border-dashed border-gray-600 animate-spin-slow"></div>
-
-    {/* Orbiting elements */}
-    <div className="absolute w-full h-full animate-spin-slow">
-      {/* Circle */}
-      <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-gradient-to-r from-pink-500 to-purple-400"></div>
-      {/* Diamond */}
-      <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-6 h-6 rotate-45 bg-gradient-to-r from-purple-500 to-pink-400"></div>
-      {/* Triangle */}
-      <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[10px] border-r-[10px] border-t-[18px] border-l-transparent border-r-transparent border-t-purple-400"></div>
-    </div>
-  </div>
-</div>
-
   );
 };
 
