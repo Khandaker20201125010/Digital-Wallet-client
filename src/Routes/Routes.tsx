@@ -10,9 +10,12 @@ import Register from '@/pages/Register';
 import RoleSelectionPage from '@/pages/RoleSelectionPage';
 import Verify from '@/pages/Verify';
 import Error from '@/utils/Error';
+import { generateRoutes } from '@/utils/generateRoutes';
 
 import ScrollToTop from '@/utils/ScrollToTop';
 import { createBrowserRouter } from 'react-router';
+import { AdminSidebar } from './AdminSidebar';
+import DashboardLayout from '@/pages/DashBoard/DashboardLayouts';
 
 export const router = createBrowserRouter([
   {
@@ -60,8 +63,14 @@ export const router = createBrowserRouter([
       },
       {
         path: '/select-role',
+        Component: DashboardLayout,
         element: <RoleSelectionPage />,
       },
     ],
+  },
+  {
+    path: '/admin',
+    Component: DashboardLayout,
+    children: [...generateRoutes(AdminSidebar)],
   },
 ]);

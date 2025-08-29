@@ -56,7 +56,6 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ className, ...props }) => {
   const [openRoleModal, setOpenRoleModal] = useState(false);
   const [isCheckingUser, setIsCheckingUser] = useState(false);
 
-
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -68,7 +67,6 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ className, ...props }) => {
     },
   });
 
-  
   const onSubmit = async (data: z.infer<typeof registerSchema>) => {
     const userInfo = {
       name: data.name,
@@ -87,15 +85,9 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ className, ...props }) => {
     }
   };
 
-const handleGoogleClick = () => {
-  window.location.assign(`${config.baseUrl}/auth/google`);
-};
-
-
-
-
-
-
+  const handleGoogleClick = () => {
+    window.location.assign(`${config.baseUrl}/auth/google`);
+  };
 
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
@@ -156,10 +148,20 @@ const handleGoogleClick = () => {
                       {...field}
                       value={field.value || 'USER'}
                       onChange={(e) => field.onChange(e.target.value)}
-                      className="w-full rounded border px-2 py-1"
+                      className="w-full rounded border bg-white px-2 py-1  text-black dark:bg-black dark:text-white border-purple-500"
                     >
-                      <option value="USER">User</option>
-                      <option value="AGENT">Agent</option>
+                      <option
+                        value="USER"
+                        className="bg-white text-black dark:bg-black dark:text-white "
+                      >
+                        User
+                      </option>
+                      <option
+                        value="AGENT"
+                        className="bg-white text-black dark:bg-black dark:text-white"
+                      >
+                        Agent
+                      </option>
                     </select>
                   </FormControl>
                   <FormMessage />
@@ -238,7 +240,6 @@ const handleGoogleClick = () => {
           Login
         </Link>
       </div>
-  
     </div>
   );
 };

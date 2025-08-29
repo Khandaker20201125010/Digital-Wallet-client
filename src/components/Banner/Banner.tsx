@@ -50,7 +50,7 @@ const Banner = () => {
                 src="https://randomuser.me/api/portraits/women/3.jpg"
                 className="h-10 w-10 rounded-full border-2 border-purple-500 dark:border-[#0B0C10]"
               />
-              <h1 className="h-10 w-10 rounded-full border border-black bg-white p-2 text-sm font-semibold dark:border-[#0B0C10]">
+              <h1 className="text-black  h-10 w-10 rounded-full border border-black bg-white p-2 text-sm font-semibold dark:border-[#0B0C10]">
                 <CountUp end={5} duration={7} suffix="k+" />
               </h1>
             </div>
