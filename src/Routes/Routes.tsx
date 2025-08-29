@@ -13,9 +13,11 @@ import Error from '@/utils/Error';
 import { generateRoutes } from '@/utils/generateRoutes';
 
 import ScrollToTop from '@/utils/ScrollToTop';
-import { createBrowserRouter } from 'react-router';
+import { createBrowserRouter, Navigate } from 'react-router';
 import { AdminSidebar } from './AdminSidebar';
 import DashboardLayout from '@/pages/DashBoard/DashboardLayouts';
+import { UserSideBar } from './UserSideBar';
+import { AgentSideBar } from './AgentSideBar';
 
 export const router = createBrowserRouter([
   {
@@ -71,6 +73,25 @@ export const router = createBrowserRouter([
   {
     path: '/admin',
     Component: DashboardLayout,
-    children: [...generateRoutes(AdminSidebar)],
+    children: [
+      { index: true, element: <Navigate to="/admin/adminProfile" /> },
+      ...generateRoutes(AdminSidebar),
+    ],
+  },
+  {
+    path: '/user',
+    Component: DashboardLayout,
+    children: [
+      { index: true, element: <Navigate to="/user/userProfile" /> },
+      ...generateRoutes(UserSideBar),
+    ],
+  },
+  {
+    path: '/agent',
+    Component: DashboardLayout,
+    children: [
+      { index: true, element: <Navigate to="/agent/agentProfile" /> },
+      ...generateRoutes(AgentSideBar),
+    ],
   },
 ]);
