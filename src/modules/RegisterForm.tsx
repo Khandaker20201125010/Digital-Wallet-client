@@ -43,7 +43,7 @@ const registerSchema = z
 import React, { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import config from '@/config';
-import RoleModal from '@/components/ui/RoleModal';
+
 
 interface RegisterFormProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;

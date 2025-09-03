@@ -7,11 +7,14 @@ import SendMoneyPayment from '@/components/SendMoneyPayment/SendMoneyPayment';
 import Steps from '@/components/steps/steps';
 import Testimonials from '@/components/Testimonials/Testimonials';
 import RoleModal from '@/components/ui/RoleModal';
+import { useUpdateUserMutation } from '@/redux/features/auth/auth.api';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 const Home = () => {
   const [openRoleModal, setOpenRoleModal] = useState(false);
   const query = new URLSearchParams(location.search);
+  const [updateUser] = useUpdateUserMutation();
 
   const isNewUser = query.get('newUser') === 'true';
   const email = query.get('email');
@@ -22,11 +25,17 @@ const Home = () => {
   }, [isNewUser]);
 
   const handleRoleSelect = async (role: 'USER' | 'AGENT') => {
-    console.log('Role selected:', role, 'for', email);
-
-
-    setOpenRoleModal(false);
+    try {
+      await updateUser({ email, role }).unwrap();
+      toast.success(`You are now registered as ${role}`);
+      setOpenRoleModal(false);
+      window.history.replaceState({}, '', window.location.pathname);
+    } catch (error) {
+      console.error(error);
+      toast.error('Failed to set role. Please try again.');
+    }
   };
+
   return (
     <div>
       <Banner></Banner>

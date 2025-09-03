@@ -1,3 +1,4 @@
+import Password from '@/components/Password';
 import {
   Form,
   FormControl,
@@ -7,12 +8,10 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import RoleModal from '@/components/ui/RoleModal';
 import config from '@/config';
 import { cn } from '@/lib/utils';
 import { useLoginMutation } from '@/redux/features/auth/auth.api';
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import type { FieldValues, SubmitHandler } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router';
@@ -86,8 +85,8 @@ export function LoginForm({
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input
-                      type="password"
+                    <Password
+                     
                       placeholder="********"
                       {...field}
                       value={field.value || ''}

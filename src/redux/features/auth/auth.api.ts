@@ -19,17 +19,17 @@ export const authApi = baseApi.injectEndpoints({
       invalidatesTags: ['USER'],
     }),
     updateUser: builder.mutation({
-      query: (userInfo) => ({
-        url: '/user/me',
+      query: ({ email, role }) => ({
+        url: '/auth/update-by-email',
         method: 'PATCH',
-        data: userInfo,
+        data: { email, role }, // ✅ correct
       }),
     }),
     checkUserExists: builder.mutation<{ exists: boolean }, { email: string }>({
       query: (userInfo) => ({
         url: '/auth/check-exists',
         method: 'POST',
-         body: userInfo, // ✅ must use data with axiosBaseQuery
+        data: userInfo, // ✅ must use data with axiosBaseQuery
       }),
     }),
     register: builder.mutation({
@@ -58,7 +58,7 @@ export const authApi = baseApi.injectEndpoints({
         url: '/user/me',
         method: 'GET',
       }),
-      providesTags: (result, error) =>
+      providesTags: (result) =>
         result?.data?.email ? [{ type: 'USER', id: 'CURRENT' }] : ['USER'],
     }),
   }),

@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
-import { Home, Settings, Bell, User, Menu, X } from 'lucide-react';
+import {
+  Home,
+  Settings,
+  Bell,
+  User,
+  Menu,
+  X,
+  Contact,
+  MessageCircleQuestionMark,
+} from 'lucide-react';
 import { Link } from 'react-router';
 import { ModeToggle } from '@/Layouts/mode-toggle';
 import logo from '../assets/images/logo.png';
+import Avatar from 'react-avatar';
 import {
   authApi,
   useLogoutMutation,
   useUserInfoQuery,
 } from '@/redux/features/auth/auth.api';
 import { useAppDispatch } from '@/redux/hooks';
+import { role } from '@/constant/role';
+import { createPortal } from 'react-dom';
 interface NavItem {
   icon: React.ReactNode;
   label: string;
@@ -45,7 +57,7 @@ const navItems: NavItem[] = [
     iconColor: 'group-hover:text-green-500 dark:group-hover:text-green-400',
   },
   {
-    icon: <User className="h-5 w-5" />,
+    icon: <Contact className="h-5 w-5" />,
     label: 'Contact',
     path: '/contact',
     gradient:
@@ -53,12 +65,51 @@ const navItems: NavItem[] = [
     iconColor: 'group-hover:text-red-500 dark:group-hover:text-red-400',
   },
   {
-    icon: <User className="h-5 w-5" />,
+    icon: <MessageCircleQuestionMark className="h-5 w-5" />,
     label: 'FAQ',
     path: '/faq',
     gradient:
       'radial-gradient(circle, rgba(139,92,246,0.15) 0%, rgba(124,58,237,0.06) 50%, rgba(109,40,217,0) 100%)',
     iconColor: 'group-hover:text-violet-500 dark:group-hover:text-violet-400',
+  },
+];
+
+const dashBoardItems = [
+  {
+    icon: <User className="h-5 w-5" />,
+    label: 'Dashboard',
+    path: '/admin',
+    role: role.admin,
+    gradient:
+      'radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(37,99,235,0.06) 50%, rgba(29,78,216,0) 100%)',
+    iconColor: 'group-hover:text-blue-500 dark:group-hover:text-blue-400',
+  },
+  {
+    icon: <User className="h-5 w-5" />,
+    label: 'Dashboard',
+    path: '/admin',
+    role: role.superAdmin,
+    gradient:
+      'radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(37,99,235,0.06) 50%, rgba(29,78,216,0) 100%)',
+    iconColor: 'group-hover:text-blue-500 dark:group-hover:text-blue-400',
+  },
+  {
+    icon: <User className="h-5 w-5" />,
+    label: 'Dashboard',
+    path: '/user',
+    role: role.user,
+    gradient:
+      'radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(37,99,235,0.06) 50%, rgba(29,78,216,0) 100%)',
+    iconColor: 'group-hover:text-blue-500 dark:group-hover:text-blue-400',
+  },
+  {
+    icon: <User className="h-5 w-5" />,
+    label: 'Dashboard',
+    path: '/agent/profile',
+    role: role.agent,
+    gradient:
+      'radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(37,99,235,0.06) 50%, rgba(29,78,216,0) 100%)',
+    iconColor: 'group-hover:text-blue-500 dark:group-hover:text-blue-400',
   },
 ];
 
@@ -105,6 +156,7 @@ function NavBar(): React.JSX.Element {
   const { data } = useUserInfoQuery(undefined);
   const [logout] = useLogoutMutation();
   const dispatch = useAppDispatch();
+  const [open, setOpen] = useState(false);
   console.log('User data:', data);
 
   const handleLogout = async () => {
@@ -206,18 +258,92 @@ function NavBar(): React.JSX.Element {
           </li>
 
           {/* Register Button */}
-          <li>
+          <li className="relative overflow-visible">
             {data?.data?.email ? (
-              // User is logged in - show Logout button
-              <button
-                onClick={handleLogout}
-                className="group relative z-10 cursor-pointer overflow-hidden rounded-full border-2 border-purple-500 bg-gradient-to-r from-blue-700 via-purple-500 to-pink-500 px-6 py-1.5 font-sans text-xs font-bold text-white transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/30 sm:px-8 sm:py-2 sm:text-sm md:px-10 md:py-2.5 md:text-base"
-              >
-                <span className="absolute inset-0 z-0 -translate-x-full bg-gradient-to-r from-blue-950 via-purple-950 to-blue-950 transition-transform duration-300 ease-in-out group-hover:translate-x-0"></span>
-                <span className="relative">Logout</span>
-              </button>
+              <>
+                {/* Avatar Button */}
+                <button
+                  onClick={() => setOpen(!open)}
+                  className="rounded-full border-2 border-purple-600 transition-transform duration-300 hover:scale-110"
+                >
+                  <Avatar
+                    name={data?.data?.name || data?.data?.email}
+                    round={true}
+                    size="40"
+                    textSizeRatio={2}
+                    className=""
+                  />
+                </button>
+
+                {/* Dropdown Menu */}
+                {open &&
+                  createPortal(
+                    <motion.div
+                      initial={{ opacity: 0, y: -10, scale: 0.9 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -10, scale: 0.9 }}
+                      transition={{
+                        type: 'spring',
+                        damping: 20,
+                        stiffness: 300,
+                      }}
+                      className="absolute top-16 right-6 z-[9999] w-48 rounded-md border border-purple-500 bg-white shadow-xl dark:bg-gray-900"
+                    >
+                      {/* User info header */}
+                      <div className="border-b border-gray-100/50 px-4 py-3 dark:border-gray-800/50">
+                        <p className="truncate text-sm font-medium text-gray-800 dark:text-white">
+                          {data?.data?.name || 'User'}
+                        </p>
+                        <p className="truncate text-xs text-gray-500 dark:text-gray-400">
+                          {data?.data?.email}
+                        </p>
+                      </div>
+
+                      {/* Dashboard Links */}
+                      {dashBoardItems
+                        .filter((item) => item.role === data?.data?.role)
+                        .map((item) => (
+                          <Link
+                            key={item.label}
+                            to={item.path}
+                            className="flex items-center gap-2 px-4 py-3 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800"
+                            onClick={() => setOpen(false)}
+                          >
+                            {item.icon}
+                            <span>{item.label}</span>
+                          </Link>
+                        ))}
+
+                      {/* Logout */}
+                      <div className="border-t border-gray-100/50 dark:border-gray-800/50">
+                        <button
+                          onClick={() => {
+                            setOpen(false);
+                            handleLogout();
+                          }}
+                          className="flex w-full items-center px-4 py-3 text-sm text-red-600 transition-colors hover:bg-red-50 hover:text-red-700 dark:text-red-400 dark:hover:bg-red-900/20 dark:hover:text-red-300"
+                        >
+                          <svg
+                            className="mr-3 h-5 w-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                            />
+                          </svg>
+                          Logout
+                        </button>
+                      </div>
+                    </motion.div>,
+                    document.body,
+                  )}
+              </>
             ) : (
-              // User is not logged in or data is loading - show Login button
               <Link to="/login" className="relative z-10">
                 <button className="group relative z-10 cursor-pointer overflow-hidden rounded-full border-2 border-purple-500 bg-gradient-to-r from-blue-700 via-purple-500 to-pink-500 px-6 py-1.5 font-sans text-xs font-bold text-white transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/30 sm:px-8 sm:py-2 sm:text-sm md:px-10 md:py-2.5 md:text-base">
                   <span className="absolute inset-0 z-0 -translate-x-full bg-gradient-to-r from-blue-950 via-purple-950 to-blue-950 transition-transform duration-300 ease-in-out group-hover:translate-x-0"></span>
@@ -254,7 +380,8 @@ function NavBar(): React.JSX.Element {
           <Link
             key={item.label}
             to={item.path}
-            className="w-full rounded-xl px-4 py-2 text-center text-sm text-gray-600 sm:text-base dark:text-gray-300"
+            className="w-full rounded-xl px-4 py-2 text-center text-sm text-gray-600 transition-colors hover:bg-gray-100 sm:text-base dark:text-gray-300 dark:hover:bg-gray-800"
+            onClick={() => setIsOpen(false)}
           >
             {item.label}
           </Link>

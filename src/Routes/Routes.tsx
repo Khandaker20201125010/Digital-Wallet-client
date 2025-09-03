@@ -18,6 +18,10 @@ import { AdminSidebar } from './AdminSidebar';
 import DashboardLayout from '@/pages/DashBoard/DashboardLayouts';
 import { UserSideBar } from './UserSideBar';
 import { AgentSideBar } from './AgentSideBar';
+import Unauthorized from '@/utils/Unauthorized';
+import { withAuth } from '@/utils/withAuth';
+import { role } from '@/constant/role';
+import type { TRole } from '@/redux/Ineterfaces/index.interface';
 
 export const router = createBrowserRouter([
   {
@@ -41,7 +45,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/features',
-        Component: Features,
+        Component: withAuth(Features),
       },
       {
         path: '/contact',
@@ -64,6 +68,10 @@ export const router = createBrowserRouter([
         Component: Verify,
       },
       {
+        path: '/unauthorized',
+        Component: Unauthorized,
+      },
+      {
         path: '/select-role',
         Component: DashboardLayout,
         element: <RoleSelectionPage />,
@@ -72,7 +80,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '/admin',
-    Component: DashboardLayout,
+    Component: withAuth(DashboardLayout, role.superAdmin as TRole),
     children: [
       { index: true, element: <Navigate to="/admin/adminProfile" /> },
       ...generateRoutes(AdminSidebar),
@@ -80,7 +88,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '/user',
-    Component: DashboardLayout,
+    Component: withAuth(DashboardLayout, role.user as TRole),
     children: [
       { index: true, element: <Navigate to="/user/userProfile" /> },
       ...generateRoutes(UserSideBar),
@@ -88,9 +96,9 @@ export const router = createBrowserRouter([
   },
   {
     path: '/agent',
-    Component: DashboardLayout,
+    Component: withAuth(DashboardLayout, role.agent as TRole),
     children: [
-      { index: true, element: <Navigate to="/agent/agentProfile" /> },
+      { index: true, element: <Navigate to="/agent/profile" /> },
       ...generateRoutes(AgentSideBar),
     ],
   },
