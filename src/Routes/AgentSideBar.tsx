@@ -13,11 +13,6 @@ export const AgentSideBar = [
         url: '/agent/profile',
         component: AgentProfile,
       },
-      {
-        title: 'Overview',
-        url: '/agent/overview',
-        component: AgentDashboardOverview,
-      },
       { title: 'Add Money', url: '/agent/add-money', component: AddMoney },
       {
         title: 'Withdraw Money',

@@ -8,7 +8,7 @@ export default function AgentDashboardOverview() {
   const { data: transactions } = useGetAgentTransactionsQuery(undefined);
 
   return (
-    <div className="grid gap-6 md:grid-cols-2">
+    <div className="py-5 grid gap-6 md:grid-cols-2">
       <Card>
         <CardContent className="p-4">
           <h2 className="text-lg font-semibold">Wallet Summary</h2>

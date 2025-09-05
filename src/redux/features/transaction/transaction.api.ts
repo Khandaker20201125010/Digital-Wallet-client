@@ -1,30 +1,37 @@
-import { baseApi } from "@/redux/baseApi";
-
+import { baseApi } from '@/redux/baseApi';
 
 export const transactionApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAgentTransactions: builder.query({
       query: () => ({
-        url: "/transactions/my", // assume backend has agent-specific
-        method: "GET",
+        url: '/transactions/my-transactions', // assume backend has agent-specific
+        method: 'GET',
       }),
-      providesTags: ["TRANSACTION"],
+      providesTags: ['TRANSACTION'],
     }),
     addMoney: builder.mutation({
-      query: (data) => ({
-        url: "/transactions/cash-in",
-        method: "POST",
-        data,
+      query: ({ userId, amount }) => ({
+        url: '/transactions',
+        method: 'POST',
+        data: {
+          to: userId, // ✅ send as `to`
+          type: 'cash_in', // ✅ required type
+          amount, // ✅ must be number
+        },
       }),
-      invalidatesTags: ["WALLET", "TRANSACTION"],
+      invalidatesTags: ['WALLET', 'TRANSACTION'],
     }),
     withdrawMoney: builder.mutation({
-      query: (data) => ({
-        url: "/transactions/cash-out",
-        method: "POST",
-        data,
+      query: ({ userId, amount }) => ({
+        url: '/transactions',
+        method: 'POST',
+        data: {
+          to: userId,
+          type: 'cash_out', // must match backend type
+          amount,
+        },
       }),
-      invalidatesTags: ["WALLET", "TRANSACTION"],
+      invalidatesTags: ['WALLET', 'TRANSACTION'],
     }),
   }),
 });

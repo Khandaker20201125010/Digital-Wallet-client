@@ -1,7 +1,6 @@
 import { baseApi } from '@/redux/baseApi';
 import type {
   IUser,
-  UpdateUserPayload,
 } from '@/redux/Ineterfaces/user.interface';
 
 export const agentApi = baseApi.injectEndpoints({

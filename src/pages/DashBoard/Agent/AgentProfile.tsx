@@ -32,6 +32,7 @@ import {
 } from '@/redux/features/agent/agent.api';
 import SingleImageUploader from '@/components/SingleImageUploader';
 import Password from '@/components/Password';
+import AgentDashboardOverview from './AgentDashboardOverview';
 
 // Form validation schemas
 const profileSchema = z.object({
@@ -151,6 +152,7 @@ export default function AgentProfile() {
   return (
     <div className="container mx-auto max-w-4xl py-8">
       {/* Header */}
+      <AgentDashboardOverview />
       <div className="mb-6 flex flex-col items-start gap-6 md:flex-row">
         <Avatar className="h-24 w-24 border md:h-32 md:w-32">
           <AvatarImage src={user?.picture} alt={user?.name} />
