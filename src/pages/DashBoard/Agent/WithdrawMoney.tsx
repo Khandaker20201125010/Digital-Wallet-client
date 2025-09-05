@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
   Card,
   CardHeader,
@@ -6,30 +6,37 @@ import {
   CardDescription,
   CardContent,
 } from '@/components/ui/card';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { useWithdrawMoneyMutation } from "@/redux/features/transaction/transaction.api";
-import { toast } from "sonner";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { useWithdrawMoneyMutation } from '@/redux/features/transaction/transaction.api';
+import { toast } from 'sonner';
 
 export default function WithdrawMoney() {
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState('');
   const [withdrawMoney, { isLoading }] = useWithdrawMoneyMutation();
 
-  const handleSubmit = async () => {
-    if (!amount) {
-      toast.error("Please enter an amount");
-      return;
-    }
+const handleSubmit = async () => {
+  if (!userId || !amount) {
+    toast.error("Please enter both User ID and Amount");
+    return;
+  }
 
-    try {
-      await withdrawMoney({ amount: Number(amount), type: "cash_out" }).unwrap();
+  try {
+    await withdrawMoney({
+      userId,        
+      amount: Number(amount),
+      type: "cash_out", 
+    }).unwrap();
 
-      toast.success(`₹${amount} withdrawn successfully`);
-      setAmount("");
-    } catch (error: any) {
-      toast.error(error?.data?.message || "Something went wrong");
-    }
-  };
+    toast.success(`₹${amount} withdrawn from user ${userId} successfully`);
+    setUserId("");
+    setAmount("");
+  } catch (error: any) {
+    toast.error(error?.data?.message || "Something went wrong");
+  }
+};
+
+  const [userId, setUserId] = useState('');
 
   return (
     <div className="relative flex min-h-[80vh] items-center justify-center px-4 sm:px-6 lg:px-8">
@@ -45,6 +52,14 @@ export default function WithdrawMoney() {
         </CardHeader>
 
         <CardContent className="space-y-6 sm:space-y-8">
+          <div>
+            <label>User ID</label>
+            <Input
+              placeholder="Enter User ID"
+              value={userId}
+              onChange={(e) => setUserId(e.target.value)}
+            />
+          </div>
           <div>
             <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
               Amount
@@ -64,11 +79,10 @@ export default function WithdrawMoney() {
             onClick={handleSubmit}
             disabled={isLoading}
           >
-            {isLoading ? "Processing..." : "Withdraw Money"}
+            {isLoading ? 'Processing...' : 'Withdraw Money'}
           </Button>
         </CardContent>
       </Card>
     </div>
   );
 }
-

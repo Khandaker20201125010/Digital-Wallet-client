@@ -14,22 +14,18 @@ export const transactionApi = baseApi.injectEndpoints({
         url: '/transactions',
         method: 'POST',
         data: {
-          to: userId, // ✅ send as `to`
-          type: 'cash_in', // ✅ required type
-          amount, // ✅ must be number
+          to: userId, //  send as `to`
+          type: 'cash_in', //  required type
+          amount, //  must be number
         },
       }),
       invalidatesTags: ['WALLET', 'TRANSACTION'],
     }),
     withdrawMoney: builder.mutation({
-      query: ({ userId, amount }) => ({
+      query: ({ userId, amount, type }) => ({
         url: '/transactions',
         method: 'POST',
-        data: {
-          to: userId,
-          type: 'cash_out', // must match backend type
-          amount,
-        },
+        data: { userId, amount, type },
       }),
       invalidatesTags: ['WALLET', 'TRANSACTION'],
     }),
