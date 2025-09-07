@@ -1,5 +1,9 @@
 // src/redux/features/transaction/transaction.api.ts
 import { baseApi } from '@/redux/baseApi';
+import type {
+  GetAllTransactionsParams,
+  GetAllTransactionsResponse,
+} from '@/redux/Ineterfaces/transaction.types';
 
 export const transactionApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -85,22 +89,28 @@ export const transactionApi = baseApi.injectEndpoints({
 
     // Admin/all transactions -- backend has GET /transactions/all-transactions
     getAllTransactions: builder.query<
-      { transactions: any[]; total: number; page: number; limit: number },
-      {
-        page?: number;
-        limit?: number;
-        type?: string;
-        startDate?: string;
-        endDate?: string;
-      }
+      GetAllTransactionsResponse,
+      GetAllTransactionsParams
     >({
-      query: ({ page = 1, limit = 20, type, startDate, endDate }) => {
+      query: ({
+        page = 1,
+        limit = 20,
+        type,
+        status,
+        startDate,
+        endDate,
+        minAmount,
+        maxAmount,
+      }) => {
         const params = new URLSearchParams();
         params.set('page', String(page));
         params.set('limit', String(limit));
         if (type) params.set('type', type);
+        if (status) params.set('status', status);
         if (startDate) params.set('startDate', startDate);
         if (endDate) params.set('endDate', endDate);
+        if (minAmount !== undefined) params.set('minAmount', String(minAmount));
+        if (maxAmount !== undefined) params.set('maxAmount', String(maxAmount));
 
         return {
           url: `/transactions/all-transactions?${params.toString()}`,

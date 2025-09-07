@@ -15,4 +15,12 @@ export type UpdateUserPayload = {
   name?: string;
   picture?: string;
   role?: TRole; 
+  isApproved?: boolean; 
 };
+
+export interface IUserFilters {
+  role?: string;
+  isActive?: string;
+  isApproved?: string;
+  search?: string;
+}

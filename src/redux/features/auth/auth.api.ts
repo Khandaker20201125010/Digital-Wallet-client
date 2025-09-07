@@ -1,6 +1,7 @@
 import { baseApi } from '@/redux/baseApi';
 import type { ISendOtp, IVerifyOtp } from '@/redux/Ineterfaces/auth.interface';
 import type { IResponse } from '@/redux/Ineterfaces/otp.interface';
+import type { IUserFilters } from '@/redux/Ineterfaces/user.interface';
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -18,19 +19,29 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['USER'],
     }),
-  updateUser: builder.mutation({
-  query: ({ id, ...payload }) => ({
-    url: `/user/${id}`,
-    method: "PATCH",
-    data: payload, 
-  }),
-}),
-
-    getAllUsers: builder.query<any[], void>({
-      query: () => ({
-        url: '/user/all-users',
-        method: 'GET',
+    updateUser: builder.mutation({
+      query: ({ id, ...payload }) => ({
+        url: `/user/${id}`,
+        method: 'PATCH',
+        data: payload,
       }),
+      invalidatesTags: ['USER'],
+    }),
+
+    getAllUsers: builder.query<any[], IUserFilters | void>({
+      query: (filters) => {
+        // Construct query params from filters
+        const params = new URLSearchParams();
+        if (filters?.role) params.append('role', filters.role);
+        if (filters?.isApproved) params.append('isApproved', filters.isApproved);
+        if (filters?.isActive) params.append('isActive', filters.isActive);
+        if (filters?.search) params.append('search', filters.search);
+
+        return {
+          url: `/user/all-users?${params.toString()}`,
+          method: 'GET',
+        };
+      },
       transformResponse: (response: any) => response.data ?? [],
     }),
     checkUserExists: builder.mutation<{ exists: boolean }, { email: string }>({
