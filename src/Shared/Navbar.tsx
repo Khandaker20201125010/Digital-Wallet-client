@@ -266,7 +266,7 @@ function NavBar(): React.JSX.Element {
                 >
                   <Avatar
                     name={data?.data?.name || data?.data?.email}
-                     src={data?.data?.picture} 
+                    src={data?.data?.picture}
                     round={true}
                     size="40"
                     textSizeRatio={2}
@@ -286,7 +286,7 @@ function NavBar(): React.JSX.Element {
                         damping: 20,
                         stiffness: 300,
                       }}
-                      className="fixed  top-16 right-6 z-[9999] w-48 rounded-md border border-purple-500 bg-white shadow-xl dark:bg-gray-900"
+                      className="fixed top-16 right-6 z-[9999] w-48 rounded-md border border-purple-500 bg-white shadow-xl dark:bg-gray-900"
                     >
                       {/* User info header */}
                       <div className="border-b border-gray-100/50 px-4 py-3 dark:border-gray-800/50">
@@ -375,6 +375,7 @@ function NavBar(): React.JSX.Element {
         transition={{ duration: 0.3 }}
         className="mt-3 flex flex-col items-center gap-3 overflow-hidden md:hidden"
       >
+        {/* Regular nav items */}
         {navItems.map((item) => (
           <Link
             key={item.label}
@@ -385,6 +386,42 @@ function NavBar(): React.JSX.Element {
             {item.label}
           </Link>
         ))}
+
+        {/* Dashboard item (based on role) */}
+        {data?.data?.role &&
+          dashBoardItems
+            .filter((item) => item.role === data?.data?.role)
+            .map((item) => (
+              <Link
+                key={item.label}
+                to={item.path}
+                className="w-full rounded-xl px-4 py-2 text-center text-sm font-semibold text-gray-500 transition-colors hover:bg-purple-100 sm:text-base dark:text-gray-300 dark:hover:bg-purple-900/30"
+                onClick={() => setIsOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+        {data?.data?.email ? (
+          // Logout
+          <button
+            onClick={() => {
+              setIsOpen(false);
+              handleLogout();
+            }}
+            className="w-full rounded-xl px-4 py-2 text-center text-sm font-semibold text-red-600 transition-colors hover:bg-red-100 sm:text-base dark:text-red-400 dark:hover:bg-red-900/30"
+          >
+            Logout
+          </button>
+        ) : (
+          // Login
+          <Link
+            to="/login"
+            className="w-full rounded-xl px-4 py-2 text-center text-sm font-semibold text-blue-600 transition-colors hover:bg-blue-100 sm:text-base dark:text-blue-400 dark:hover:bg-blue-900/30"
+            onClick={() => setIsOpen(false)}
+          >
+            Login
+          </Link>
+        )}
       </motion.ul>
     </motion.nav>
   );
