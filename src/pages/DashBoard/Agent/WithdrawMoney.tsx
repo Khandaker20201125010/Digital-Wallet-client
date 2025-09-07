@@ -8,38 +8,36 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useWithdrawMoneyMutation } from '@/redux/features/transaction/transaction.api';
 import { toast } from 'sonner';
+import { useAgentCashOutMutation } from '@/redux/features/transaction/transaction.api';
 
 export default function WithdrawMoney() {
-  const [amount, setAmount] = useState('');
-  const [withdrawMoney, { isLoading }] = useWithdrawMoneyMutation();
-
-const handleSubmit = async () => {
-  if (!userId || !amount) {
-    toast.error("Please enter both User ID and Amount");
-    return;
-  }
-
-  try {
-    await withdrawMoney({
-      userId,        
-      amount: Number(amount),
-      type: "cash_out", 
-    }).unwrap();
-
-    toast.success(`₹${amount} withdrawn from user ${userId} successfully`);
-    setUserId("");
-    setAmount("");
-  } catch (error: any) {
-    toast.error(error?.data?.message || "Something went wrong");
-  }
-};
-
   const [userId, setUserId] = useState('');
+  const [amount, setAmount] = useState('');
+  const [agentCashOut, { isLoading }] = useAgentCashOutMutation();
+
+  const handleSubmit = async () => {
+    if (!userId || !amount) {
+      toast.error("Please enter both User ID and Amount");
+      return;
+    }
+
+    try {
+      await agentCashOut({
+        userId,
+        amount: Number(amount),
+      }).unwrap();
+
+      toast.success(`₹${amount} withdrawn from user ${userId} successfully`);
+      setUserId("");
+      setAmount("");
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Something went wrong");
+    }
+  };
 
   return (
-    <div className="relative flex min-h-[80vh] items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div data-aos="zoom-in" data-aos-duration="1500" className="relative flex min-h-[80vh] items-center justify-center px-4 sm:px-6 lg:px-8">
       <div className="absolute h-[450px] w-[600px] rounded-full bg-purple-500 opacity-50 blur-[180px] dark:bg-purple-700"></div>
       <Card className="relative w-full max-w-md border border-purple-200 shadow-lg sm:max-w-lg md:max-w-xl lg:max-w-2xl dark:border-purple-800">
         <CardHeader className="text-center">
@@ -47,7 +45,7 @@ const handleSubmit = async () => {
             Withdraw Money
           </CardTitle>
           <CardDescription className="text-sm sm:text-base">
-            Enter the amount you want to withdraw from your wallet.
+            Enter the amount you want to withdraw from a user’s wallet.
           </CardDescription>
         </CardHeader>
 

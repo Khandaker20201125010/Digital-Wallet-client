@@ -24,7 +24,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 import { useUserInfoQuery } from '@/redux/features/auth/auth.api';
-
 import { toast } from 'sonner';
 import {
   useChangePasswordMutation,
@@ -32,9 +31,9 @@ import {
 } from '@/redux/features/agent/agent.api';
 import SingleImageUploader from '@/components/SingleImageUploader';
 import Password from '@/components/Password';
-import AgentDashboardOverview from './AgentDashboardOverview';
+import SetPasswordForm from '@/components/SetPasswordForm';
 
-// Form validation schemas
+// ---------------- Validation Schemas ----------------
 const profileSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
@@ -70,10 +69,15 @@ export default function AgentProfile() {
     useChangePasswordMutation();
 
   const user = userData?.data;
-
   const [image, setImage] = useState<File | null>(null);
 
-  // Profile form setup
+  // Detect Google-only users (auths = [{provider:"google"}], no password)
+  const isGoogleOnly =
+    user?.auths?.length === 1 &&
+    user?.auths[0].provider === 'google' &&
+    !user?.password;
+
+  // ---------------- Profile form ----------------
   const profileForm = useForm<ProfileFormValues>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
@@ -84,7 +88,7 @@ export default function AgentProfile() {
     },
   });
 
-  // Password form setup
+  // ---------------- Password form ----------------
   const passwordForm = useForm<PasswordFormValues>({
     resolver: zodResolver(passwordSchema),
     defaultValues: {
@@ -94,13 +98,11 @@ export default function AgentProfile() {
     },
   });
 
-  // Update form values when user data changes
   useEffect(() => {
     if (user) {
       profileForm.reset({
         name: user.name || '',
         email: user.email || '',
-
         picture: user.picture || '',
       });
     }
@@ -109,15 +111,11 @@ export default function AgentProfile() {
   const onProfileSubmit = async (values: ProfileFormValues) => {
     try {
       const formData = new FormData();
-
-      // Append text fields
       formData.append('name', values.name);
       formData.append('email', values.email);
       if (values.phone) formData.append('phone', values.phone);
-
-      // Append image if selected
       if (image) {
-        formData.append('picture', image); // 👈 must match multer.single("picture")
+        formData.append('picture', image);
       }
 
       await updateProfile(formData).unwrap();
@@ -150,10 +148,10 @@ export default function AgentProfile() {
       .toUpperCase();
 
   return (
-    <div className="container mx-auto max-w-4xl py-8">
+    <div data-aos="zoom-in" data-aos-duration="1500" className="container mx-auto max-w-4xl py-8">
       {/* Header */}
-      <AgentDashboardOverview />
-      <div className="mb-6 flex flex-col items-start gap-6 md:flex-row">
+     
+      <div  className="mb-6 flex flex-col items-start gap-6 md:flex-row">
         <Avatar className="h-24 w-24 border md:h-32 md:w-32">
           <AvatarImage src={user?.picture} alt={user?.name} />
           <AvatarFallback className="text-2xl">
@@ -175,7 +173,9 @@ export default function AgentProfile() {
       <Tabs defaultValue="profile" className="w-full">
         <TabsList className="grid w-full max-w-md grid-cols-2">
           <TabsTrigger value="profile">Profile Information</TabsTrigger>
-          <TabsTrigger value="password">Change Password</TabsTrigger>
+          <TabsTrigger value="password">
+            {isGoogleOnly ? 'Set Password' : 'Change Password'}
+          </TabsTrigger>
         </TabsList>
 
         {/* Profile Tab */}
@@ -211,16 +211,13 @@ export default function AgentProfile() {
                   </div>
 
                   <SingleImageUploader onChange={setImage} />
+
                   <button
                     type="submit"
                     disabled={isUpdatingProfile}
                     className="group relative z-10 mt-6 inline-block cursor-pointer overflow-hidden rounded-full border-2 border-purple-500 bg-gradient-to-r from-blue-950 via-purple-950 to-blue-950 px-6 py-3 font-sans text-base font-bold text-white max-sm:w-full dark:text-white"
                   >
-                    {/* Background sliding effect */}
                     <span className="absolute inset-0 z-[-1] -translate-x-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-transform duration-300 ease-in-out group-hover:translate-x-0"></span>
-
-                    {/* Button text */}
-
                     <span className="relative">
                       {isUpdatingProfile ? 'Saving...' : 'Update Profile'}
                     </span>
@@ -233,84 +230,93 @@ export default function AgentProfile() {
 
         {/* Password Tab */}
         <TabsContent value="password" className="mt-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Change Password</CardTitle>
-              <CardDescription>
-                Ensure your account is using a long, random password to stay
-                secure.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Form {...passwordForm}>
-                <form
-                  onSubmit={passwordForm.handleSubmit(onPasswordSubmit)}
-                  className="space-y-4"
-                >
-                  <FormField
-                    control={passwordForm.control}
-                    name="currentPassword"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Current Password</FormLabel>
-                        <FormControl>
-                          <Password {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={passwordForm.control}
-                    name="newPassword"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>New Password</FormLabel>
-                        <FormControl>
-                          <Password {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={passwordForm.control}
-                    name="confirmPassword"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Confirm New Password</FormLabel>
-                        <FormControl>
-                          <Password {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <button
-                    type="submit"
-                    disabled={isUpdatingPassword}
-                    className="group relative z-10 mt-6 inline-block cursor-pointer overflow-hidden rounded-full border-2 border-purple-500 bg-gradient-to-r from-blue-950 via-purple-950 to-blue-950 px-6 py-3 font-sans text-base font-bold text-white max-sm:w-full dark:text-white"
+          {isGoogleOnly ? (
+            <SetPasswordForm />
+          ) : (
+            <Card>
+              <CardHeader>
+                <CardTitle>Change Password</CardTitle>
+                <CardDescription>
+                  Ensure your account is using a long, random password to stay
+                  secure.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Form {...passwordForm}>
+                  <form
+                    onSubmit={passwordForm.handleSubmit(onPasswordSubmit)}
+                    className="space-y-4"
                   >
-                    {/* Background sliding effect */}
-                    <span className="absolute inset-0 z-[-1] translate-x-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-transform duration-300 ease-in-out group-hover:translate-x-0"></span>
-
-                    {/* Button text */}
-
-                    <span className="relative">
-                      {' '}
-                      {isUpdatingPassword
-                        ? 'Updating...'
-                        : 'Update Password'}{' '}
-                    </span>
-                  </button>
-                </form>
-              </Form>
-            </CardContent>
-          </Card>
+                    <input
+                      type="text"
+                      name="username"
+                      value={user?.email ?? ''}
+                      autoComplete="username"
+                      readOnly
+                      className="sr-only"
+                      tabIndex={-1}
+                      aria-hidden="true"
+                    />
+                    <FormField
+                      control={passwordForm.control}
+                      name="currentPassword"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Current Password</FormLabel>
+                          <FormControl>
+                            <Password
+                              {...field}
+                              autoComplete="current-password"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={passwordForm.control}
+                      name="newPassword"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>New Password</FormLabel>
+                          <FormControl>
+                            <Password {...field} autoComplete="new-password" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={passwordForm.control}
+                      name="confirmPassword"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Confirm New Password</FormLabel>
+                          <FormControl>
+                            <Password {...field} autoComplete="new-password" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <button
+                      type="submit"
+                      disabled={isUpdatingPassword}
+                      className="group relative z-10 mt-6 inline-block cursor-pointer overflow-hidden rounded-full border-2 border-purple-500 bg-gradient-to-r from-blue-950 via-purple-950 to-blue-950 px-6 py-3 font-sans text-base font-bold text-white max-sm:w-full dark:text-white"
+                    >
+                      <span className="absolute inset-0 z-[-1] translate-x-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-transform duration-300 ease-in-out group-hover:translate-x-0"></span>
+                      <span className="relative">
+                        {isUpdatingPassword ? 'Updating...' : 'Update Password'}
+                      </span>
+                    </button>
+                  </form>
+                </Form>
+              </CardContent>
+            </Card>
+          )}
         </TabsContent>
       </Tabs>
+     
     </div>
   );
 }

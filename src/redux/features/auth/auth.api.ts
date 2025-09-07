@@ -18,12 +18,20 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['USER'],
     }),
-    updateUser: builder.mutation({
-      query: ({ email, role }) => ({
-        url: '/auth/update-by-email',
-        method: 'PATCH',
-        data: { email, role }, // ✅ correct
+  updateUser: builder.mutation({
+  query: ({ id, ...payload }) => ({
+    url: `/user/${id}`,
+    method: "PATCH",
+    data: payload, 
+  }),
+}),
+
+    getAllUsers: builder.query<any[], void>({
+      query: () => ({
+        url: '/user/all-users',
+        method: 'GET',
       }),
+      transformResponse: (response: any) => response.data ?? [],
     }),
     checkUserExists: builder.mutation<{ exists: boolean }, { email: string }>({
       query: (userInfo) => ({
@@ -61,6 +69,23 @@ export const authApi = baseApi.injectEndpoints({
       providesTags: (result) =>
         result?.data?.email ? [{ type: 'USER', id: 'CURRENT' }] : ['USER'],
     }),
+    setPassword: builder.mutation<{ message: string }, { password: string }>({
+      query: (body) => ({
+        url: '/auth/set-password',
+        method: 'POST',
+        data: body,
+      }),
+    }),
+    searchUsersByEmail: builder.query<any[], string>({
+      query: (email) => ({
+        url: `/user/search?email=${encodeURIComponent(email)}`, // ✅ singular 'user'
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }),
+      transformResponse: (response: any) => response.data ?? [],
+    }),
   }),
 });
 
@@ -73,4 +98,7 @@ export const {
   useCheckUserExistsMutation,
   useUserInfoQuery,
   useLogoutMutation,
+  useSetPasswordMutation,
+  useSearchUsersByEmailQuery,
+  useGetAllUsersQuery,
 } = authApi;

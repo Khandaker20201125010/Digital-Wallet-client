@@ -73,8 +73,8 @@ export const router = createBrowserRouter([
       },
       {
         path: '/select-role',
-        Component: DashboardLayout,
-        element: <RoleSelectionPage />,
+        Component: RoleSelectionPage,
+       
       },
     ],
   },

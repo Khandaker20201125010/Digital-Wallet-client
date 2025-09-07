@@ -105,7 +105,7 @@ const dashBoardItems = [
   {
     icon: <User className="h-5 w-5" />,
     label: 'Dashboard',
-    path: '/agent/profile',
+    path: '/agent',
     role: role.agent,
     gradient:
       'radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(37,99,235,0.06) 50%, rgba(29,78,216,0) 100%)',
@@ -157,8 +157,6 @@ function NavBar(): React.JSX.Element {
   const [logout] = useLogoutMutation();
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
-  console.log('User data:', data);
-
   const handleLogout = async () => {
     await logout(undefined);
     dispatch(authApi.util.resetApiState());
@@ -268,6 +266,7 @@ function NavBar(): React.JSX.Element {
                 >
                   <Avatar
                     name={data?.data?.name || data?.data?.email}
+                     src={data?.data?.picture} 
                     round={true}
                     size="40"
                     textSizeRatio={2}
@@ -287,7 +286,7 @@ function NavBar(): React.JSX.Element {
                         damping: 20,
                         stiffness: 300,
                       }}
-                      className="absolute top-16 right-6 z-[9999] w-48 rounded-md border border-purple-500 bg-white shadow-xl dark:bg-gray-900"
+                      className="fixed  top-16 right-6 z-[9999] w-48 rounded-md border border-purple-500 bg-white shadow-xl dark:bg-gray-900"
                     >
                       {/* User info header */}
                       <div className="border-b border-gray-100/50 px-4 py-3 dark:border-gray-800/50">
