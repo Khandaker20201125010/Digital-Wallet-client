@@ -1,10 +1,13 @@
 import Marquee from 'react-fast-marquee';
-
+import partnerlogo1 from '../../assets/images/partnerlogo1.svg';
+import partnerlogo2 from '../../assets/images/partnerlogo2.svg';
+import partnerlogo3 from '../../assets/images/partnerlogo3.svg';
+import partnerlogo4 from '../../assets/images/partnerlogo4.svg';
 const logos = [
-  { id: 1, src: '/src/assets/images/partnerlogo1.svg', alt: 'Partner 1' },
-  { id: 2, src: '/src/assets/images/partnerlogo2.svg', alt: 'Partner 2' },
-  { id: 3, src: '/src/assets/images/partnerlogo3.svg', alt: 'Partner 3' },
-  { id: 4, src: '/src/assets/images/partnerlogo4.svg', alt: 'Partner 4' },
+  { id: 1, src: partnerlogo1 , alt: 'Partner 1' },
+  { id: 2, src: partnerlogo2 , alt: 'Partner 2' },
+  { id: 3, src: partnerlogo3 , alt: 'Partner 3' },
+  { id: 4, src:  partnerlogo4 , alt: 'Partner 4' },
 ];
 
 export default function BannerFooter() {

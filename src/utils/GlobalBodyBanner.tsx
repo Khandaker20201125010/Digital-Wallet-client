@@ -74,7 +74,7 @@ const GlobalBodyBanner = () => {
           className="relative order-3 flex justify-center md:order-2 md:w-1/3"
         >
           {/* Glow Effect */}
-          <div className="absolute h-[450px] w-[600px] rounded-full bg-purple-500 opacity-50 blur-[180px] dark:bg-purple-700"></div>
+          <div className="absolute h-[450px] w-[300px] rounded-full bg-purple-500 opacity-50 blur-[180px] dark:bg-purple-700"></div>
 
           {/* Top Card */}
           <img
