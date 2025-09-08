@@ -132,3 +132,19 @@ body {
 .animate-spin-slow {
   animation: spin-slow 8s linear infinite; /* slower & smooth */
 }
+.featureBG {
+  background-image: url('./assets/images/featureBg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; /* ✅ important */
+  height: 400px;
+  width: 100%; /* ensure it spans full width */
+}
+.aboutBG {
+  background-image: url('./assets/images/aboutbg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; /* ✅ important */
+  height: 400px;
+  width: 100%; /* ensure it spans full width */
+}
