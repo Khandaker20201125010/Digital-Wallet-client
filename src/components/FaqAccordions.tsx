@@ -6,9 +6,9 @@ import {
 } from "@/components/ui/accordion";
 
 
-const FaqAccordion = () => {
+const FaqAccordions = () => {
     return (
-       <section data-aos="fade-up" data-aos-duration="1500" className="w-full  py-16">
+           <section data-aos="fade-up" data-aos-duration="1500" className="w-full  py-16">
       <div className="container mx-auto max-w-2xl px-6">
         <h2 className="text-center text-3xl font-bold mb-10 text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 ">
           Frequently Asked Questions
@@ -71,4 +71,4 @@ const FaqAccordion = () => {
     );
 };
 
-export default FaqAccordion;
+export default FaqAccordions;

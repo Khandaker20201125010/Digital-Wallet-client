@@ -1,7 +1,10 @@
-import FaqAccordion from '@/components/faqAccordion';
+
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router';
 import logo from '../assets/images/logo.png';
+import FaqAccordions from '@/components/FaqAccordions';
+
+
 
 const FAQ = () => {
   return (
@@ -39,7 +42,7 @@ const FAQ = () => {
       </div>
 
       {/* FAQ Accordion */}
-      <FaqAccordion />
+      <FaqAccordions />
 
       <div  className="relative w-full py-20 text-black dark:text-white">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-12 px-6 md:flex-row">

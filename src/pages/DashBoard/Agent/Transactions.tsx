@@ -2,7 +2,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useGetMyTransactionsQuery } from '@/redux/features/transaction/transaction.api';
 
 export default function Transactions() {
-  const { data, isFetching } = useGetMyTransactionsQuery({
+  const { data } = useGetMyTransactionsQuery({
     page: 1,
     limit: 50,
   });
@@ -47,7 +47,7 @@ export default function Transactions() {
                   {tx.to?.email || tx.initiatedBy}
                 </td>
                 <td className="px-4 py-3 text-right text-sm text-gray-700 dark:text-gray-300">
-                  ₹{tx.amount.toLocaleString()}
+                  BDT{tx.amount.toLocaleString()}
                 </td>
               </tr>
             ))}

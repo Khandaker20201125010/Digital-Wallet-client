@@ -148,10 +148,14 @@ export default function AgentProfile() {
       .toUpperCase();
 
   return (
-    <div data-aos="zoom-in" data-aos-duration="1500" className="container mx-auto max-w-4xl py-8">
+    <div
+      data-aos="zoom-in"
+      data-aos-duration="1500"
+      className="container mx-auto max-w-4xl py-8"
+    >
       {/* Header */}
-     
-      <div  className="mb-6 flex flex-col items-start gap-6 md:flex-row">
+
+      <div className="mb-6 flex flex-col items-start gap-6 md:flex-row">
         <Avatar className="h-24 w-24 border md:h-32 md:w-32">
           <AvatarImage src={user?.picture} alt={user?.name} />
           <AvatarFallback className="text-2xl">
@@ -161,6 +165,10 @@ export default function AgentProfile() {
         <div>
           <h1 className="text-3xl font-bold">{user?.name}</h1>
           <p className="text-muted-foreground">{user?.email}</p>
+          <p className="text-muted-foreground">
+            Agent ID:
+            <span className="font-bold text-purple-600"> {user?._id}</span>
+          </p>
           <p className="mt-1 capitalize">
             <span className="bg-primary/10 text-primary rounded-md px-2 py-1 text-sm">
               {user?.role?.toLowerCase().replace('_', ' ')}
@@ -316,7 +324,6 @@ export default function AgentProfile() {
           )}
         </TabsContent>
       </Tabs>
-     
     </div>
   );
 }

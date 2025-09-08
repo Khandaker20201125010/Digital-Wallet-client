@@ -161,6 +161,10 @@ export default function UserProfile() {
         <div>
           <h1 className="text-3xl font-bold">{user?.name}</h1>
           <p className="text-muted-foreground">{user?.email}</p>
+           <p className="text-muted-foreground">
+            User ID:
+            <span className="font-bold text-purple-600"> {user?._id}</span>
+          </p>
           <p className="mt-1 capitalize">
             <span className="bg-primary/10 text-primary rounded-md px-2 py-1 text-sm">
               {user?.role?.toLowerCase().replace('_', ' ')}

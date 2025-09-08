@@ -15,9 +15,7 @@ import { Link, useNavigate } from 'react-router';
 import Password from '@/components/Password';
 import { toast } from 'sonner';
 import {
-  useCheckUserExistsMutation,
   useRegisterMutation,
-  useUserInfoQuery,
 } from '@/redux/features/auth/auth.api';
 
 const registerSchema = z
@@ -52,9 +50,7 @@ interface RegisterFormProps extends React.HTMLAttributes<HTMLDivElement> {
 const RegisterForm: React.FC<RegisterFormProps> = ({ className, ...props }) => {
   const [register] = useRegisterMutation();
   const navigate = useNavigate();
-
-  const [openRoleModal, setOpenRoleModal] = useState(false);
-  const [isCheckingUser, setIsCheckingUser] = useState(false);
+  const [isCheckingUser, ] = useState(false);
 
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),

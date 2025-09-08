@@ -1,46 +1,46 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
   CardContent,
-} from "@/components/ui/card";
-import { useAgentCashInMutation } from "@/redux/features/transaction/transaction.api";
-import { toast } from "sonner";
+} from '@/components/ui/card';
+import { useAgentCashInMutation } from '@/redux/features/transaction/transaction.api';
+import { toast } from 'sonner';
 
 export default function AgentAddMoney() {
-  const [userId, setUserId] = useState("");
-  const [amount, setAmount] = useState("");
+  const [userId, setUserId] = useState('');
+  const [amount, setAmount] = useState('');
   const [cashIn, { isLoading }] = useAgentCashInMutation();
 
   const handleSubmit = async () => {
     if (!userId || !amount) {
-      toast.error("Please enter both User ID and Amount.");
+      toast.error('Please enter both User ID and Amount.');
       return;
     }
 
     // ensure amount is a number
     const numeric = Number(amount);
     if (!Number.isFinite(numeric) || numeric <= 0) {
-      toast.error("Enter a valid positive amount.");
+      toast.error('Enter a valid positive amount.');
       return;
     }
 
     try {
       // payload shape must match server zod schema: { type: 'cash_in', to, amount }
       await cashIn({ userId, amount: numeric }).unwrap();
-      toast.success(`₹${numeric} deposited to User ID: ${userId}`);
-      setUserId("");
-      setAmount("");
+      toast.success(`BDT${numeric} deposited to User ID: ${userId}`);
+      setUserId('');
+      setAmount('');
     } catch (err: any) {
       // RTK Query error format can be either err.data or err.error; log both
-      console.error("AgentCashIn error:", err);
+      console.error('AgentCashIn error:', err);
       const serverMessage =
         err?.data?.message || err?.data?.errors || err?.error || err?.message;
-      toast.error(String(serverMessage || "Transaction failed."));
+      toast.error(String(serverMessage || 'Transaction failed.'));
     }
   };
 
@@ -48,7 +48,11 @@ export default function AgentAddMoney() {
     /* same JSX you already have */
     <div className="relative flex min-h-[80vh] items-center justify-center px-4 sm:px-6 lg:px-8">
       <div className="absolute h-[450px] w-[600px] rounded-full bg-purple-500 opacity-50 blur-[180px] dark:bg-purple-700"></div>
-      <Card data-aos="zoom-in" data-aos-duration="1500" className="relative w-full max-w-md border border-purple-200 shadow-lg sm:max-w-lg md:max-w-xl lg:max-w-2xl dark:border-purple-800">
+      <Card
+        data-aos="zoom-in"
+        data-aos-duration="1500"
+        className="relative w-full max-w-md border border-purple-200 shadow-lg sm:max-w-lg md:max-w-xl lg:max-w-2xl dark:border-purple-800"
+      >
         <CardHeader className="text-center">
           <CardTitle className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 bg-clip-text text-xl font-bold text-transparent sm:text-2xl">
             Agent Cash-In
@@ -90,7 +94,7 @@ export default function AgentAddMoney() {
             onClick={handleSubmit}
             disabled={isLoading}
           >
-            {isLoading ? "Processing..." : "Deposit (Cash-In)"}
+            {isLoading ? 'Processing...' : 'Deposit (Cash-In)'}
           </Button>
         </CardContent>
       </Card>

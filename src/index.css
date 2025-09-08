@@ -156,3 +156,11 @@ body {
   height: 400px;
   width: 100%; /* ensure it spans full width */
 }
+.contactBG {
+  background-image: url('./assets/images/contactBg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; /* ✅ important */
+  height: 400px;
+  width: 100%; /* ensure it spans full width */
+}

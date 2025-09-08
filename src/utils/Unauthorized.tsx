@@ -22,7 +22,7 @@ const Unauthorized = () => {
 
         <button
           onClick={() => navigate("/")}
-          className="mt-6 inline-flex items-center gap-2 bg-red-600 text-white px-5 py-2.5 rounded-xl hover:bg-red-700 transition-all"
+          className="mt-6 cursor-pointer inline-flex items-center gap-2 bg-red-600 text-white px-5 py-2.5 rounded-xl hover:bg-red-700 transition-all"
         >
           <Home className="h-5 w-5" />
           Go Back to Home

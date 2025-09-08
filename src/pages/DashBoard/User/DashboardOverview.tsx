@@ -27,7 +27,7 @@ export default function DashboardOverview() {
           <CardContent className="flex items-center justify-between">
             <div>
               <div className="text-3xl font-extrabold text-purple-600 dark:text-purple-400">
-                ₹{(wallet?.balance ?? 0).toLocaleString()}
+                BDT{(wallet?.balance ?? 0).toLocaleString()}
               </div>
               <div className="text-muted-foreground mt-1 text-sm">
                 Status: {wallet?.status ?? 'N/A'}
@@ -35,18 +35,27 @@ export default function DashboardOverview() {
             </div>
             <div className="flex flex-col gap-2">
               <Link to="/user/deposit">
-                <Button variant="gradient" className="w-28 bg-gradient-to-r from-purple-500 to-pink-500 text-white">
+                <Button
+                  variant="gradient"
+                  className="w-28 bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+                >
                   Deposit
                 </Button>
               </Link>
               <Link to="/user/withdraw">
-                <Button variant="gradient" className="w-28 bg-gradient-to-r from-purple-500 to-pink-500 text-white">
-                 Withdraw
+                <Button
+                  variant="gradient"
+                  className="w-28 bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+                >
+                  Withdraw
                 </Button>
               </Link>
 
               <Link to="/user/Send">
-                <Button variant="gradient" className="w-28 bg-gradient-to-r from-purple-500 to-pink-500 text-white">
+                <Button
+                  variant="gradient"
+                  className="w-28 bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+                >
                   Send
                 </Button>
               </Link>

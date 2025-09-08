@@ -33,7 +33,8 @@ export const authApi = baseApi.injectEndpoints({
         // Construct query params from filters
         const params = new URLSearchParams();
         if (filters?.role) params.append('role', filters.role);
-        if (filters?.isApproved) params.append('isApproved', filters.isApproved);
+        if (filters?.isApproved)
+          params.append('isApproved', filters.isApproved);
         if (filters?.isActive) params.append('isActive', filters.isActive);
         if (filters?.search) params.append('search', filters.search);
 
@@ -97,6 +98,14 @@ export const authApi = baseApi.injectEndpoints({
       }),
       transformResponse: (response: any) => response.data ?? [],
     }),
+    selectRole: builder.mutation({
+      query: ({ email, role }) => ({
+        url: '/auth/select-role',
+        method: 'PATCH',
+        data: { email, role },
+      }),
+      invalidatesTags: ['USER'],
+    }),
   }),
 });
 
@@ -110,6 +119,8 @@ export const {
   useUserInfoQuery,
   useLogoutMutation,
   useSetPasswordMutation,
+
   useSearchUsersByEmailQuery,
   useGetAllUsersQuery,
+  useSelectRoleMutation,
 } = authApi;

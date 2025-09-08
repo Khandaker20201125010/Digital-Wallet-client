@@ -32,7 +32,6 @@ export default function AdminOverview() {
           <h2 className="text-muted-foreground text-sm">Transactions</h2>
           <p className="text-2xl font-bold">{totalTransactions}</p>
         </div>
-     
       </div>
 
       {/* Recent Transactions */}
@@ -52,7 +51,7 @@ export default function AdminOverview() {
               <tr key={tx._id} className="border-b">
                 <td className="py-2">{tx._id.slice(0, 6)}...</td>
                 <td className="py-2 capitalize">{tx.type}</td>
-                <td className="py-2">₹{tx.amount}</td>
+                <td className="py-2">BDT{tx.amount}</td>
                 <td className="py-2">
                   {new Date(tx.createdAt).toLocaleDateString()}
                 </td>

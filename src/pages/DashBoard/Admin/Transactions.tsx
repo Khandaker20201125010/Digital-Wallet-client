@@ -117,7 +117,7 @@ export default function Transactions() {
                   <td>{tx.from?.email ?? 'N/A'}</td>
                   <td className="capitalize">{tx.type}</td>
                   <td className="capitalize">{tx.status}</td>
-                  <td>₹{tx.amount}</td>
+                  <td>BDT{tx.amount}</td>
                   <td>{new Date(tx.createdAt).toLocaleDateString()}</td>
                 </tr>
               ))}

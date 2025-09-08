@@ -1,6 +1,7 @@
 import digitalCardOne from '../../assets/images/digital-card-one.png';
 import digitalCardtwo from '../../assets/images/digital-card-two.png';
-import PricePlaningCard from './PriceplaningCard';
+import PricePlaningCard from './PricePlaningCard';
+
 const PricePling = () => {
   return (
     <div>

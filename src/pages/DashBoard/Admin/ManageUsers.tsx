@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useGetAllUsersQuery, useUpdateUserMutation } from "@/redux/features/auth/auth.api";
 import { toast } from "sonner";

@@ -1,6 +1,3 @@
-import onlineBankingOne from '../../assets/images/onlinebankingone.jpg';
-import onlineBankingTwo from '../../assets/images/onlinebanking 2.jpg';
-import onlineBankingThree from '../../assets/images/onlinebanking3.jpg';
 import BentoGrids from './BentoGrids';
 const NewsAndEvents = () => {
   return (

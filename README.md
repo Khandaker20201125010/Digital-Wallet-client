@@ -1,69 +1,77 @@
-# React + TypeScript + Vite
+# 🌊 Wavefounds – Digital Wallet Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **secure, role-based, and user-friendly** digital wallet system built with **React, Redux Toolkit, and RTK Query**, inspired by services like **bKash** and **Nagad**.  
 
-Currently, two official plugins are available:
+🔗 **Live Demo:** [https://digital-wallet-client-six.vercel.app/](https://digital-wallet-client-six.vercel.app/)  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🔓 Public Landing Section
+- Responsive **Home Page** with hero banner, CTA, sticky navbar & footer  
+- **About, Features, Contact, FAQ** pages  
+- Smooth transitions, skeleton loading, and responsive UI  
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 🔑 Authentication
+- **OTP-based Login** with JWT  
+- Registration with **User** / **Agent** role selection  
+- Role-based redirection after login  
+- Persisted auth state (remains logged in after refresh)  
+- Logout functionality  
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### 👤 User Dashboard
+- Wallet balance overview & quick actions  
+- Deposit, withdraw, send money (search user by phone/email)  
+- Transaction history with pagination & filters  
+- Profile update (name, phone, password)  
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+### 🧑‍💼 Agent Dashboard
+- Cash-in / Cash-out operations  
+- User wallet management  
+- Agent’s transaction history & commission tracking  
+- Profile management  
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 🛠️ Admin Dashboard
+- Overview of users, agents, and transactions  
+- User management (view, block/unblock)  
+- Agent management (approve/suspend)  
+- Global transaction monitoring with filters & search  
+- System settings (fees/limits – optional)  
+- Profile update  
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+### ⚡ General Features
+- Role-based navigation menus  
+- Loading indicators & global error handling  
+- Form validation & advanced search/filtering  
+- Pagination on lists & tables  
+- **Charts & Cards** for data visualization  
+- **Toast Notifications** for instant feedback  
+- **Guided Tour (react-joyride)** – highlights 5 key features for new users  
+- Light/Dark mode toggle  
+- Fully responsive design (mobile-first)  
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- ⚛️ React + TypeScript  
+- 🛠️ Redux Toolkit + RTK Query  
+- 🎨 Tailwind CSS (UI styling)  
+- 🔔 React-Toastify / Sonner (notifications)  
+- 🧭 React Joyride (guided tour)  
+
+### Backend (separate repo)
+- Node.js + Express  
+- MongoDB + Mongoose  
+- JWT + bcrypt for authentication  
+
+---
+
+## 🚀 Getting Started
+
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/your-username/wavefounds-client.git
+cd wavefounds-client

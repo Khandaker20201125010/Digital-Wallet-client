@@ -1,4 +1,3 @@
-// src/redux/features/transaction/transaction.api.ts
 import { baseApi } from '@/redux/baseApi';
 import type {
   GetAllTransactionsParams,

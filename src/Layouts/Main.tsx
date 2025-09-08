@@ -15,7 +15,7 @@ const Main = () => {
     return () => clearTimeout(timer);
   }, [location.pathname]);
 
-  const hideNavbarFooter = ["/login", "/register"].includes(location.pathname);
+  const hideNavbarFooter = ["/login", "/register","/unauthorized"].includes(location.pathname);
 
   if (loading) {
     return (

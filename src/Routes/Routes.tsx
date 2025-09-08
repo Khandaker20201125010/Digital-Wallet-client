@@ -74,13 +74,15 @@ export const router = createBrowserRouter([
       {
         path: '/select-role',
         Component: RoleSelectionPage,
-       
       },
     ],
   },
   {
     path: '/admin',
-    Component: withAuth(DashboardLayout, role.superAdmin as TRole),
+    Component: withAuth(DashboardLayout, [
+      role.superAdmin,
+      role.admin,
+    ] as TRole[]),
     children: [
       { index: true, element: <Navigate to="/admin/adminProfile" /> },
       ...generateRoutes(AdminSidebar),

@@ -25,13 +25,19 @@ export default function DepositPage() {
   };
 
   return (
-    <div data-aos="zoom-in" data-aos-duration="1500" className="relative flex min-h-[80vh] items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div
+      data-aos="zoom-in"
+      data-aos-duration="1500"
+      className="relative flex min-h-[80vh] items-center justify-center px-4 sm:px-6 lg:px-8"
+    >
       <div className="absolute h-[450px] w-[600px] rounded-full bg-purple-500 opacity-50 blur-[180px] dark:bg-purple-700"></div>
       <Card className="dark:border- -700 relative w-full max-w-md rounded-xl border border-red-200 bg-white shadow-2xl sm:max-w-lg dark:bg-gray-900">
         <CardContent className="space-y-6">
-          <h2 className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-red-600 via-pink-500 to-purple-500 bg-clip-text text-transparent">Deposit Money</h2>
+          <h2 className="bg-gradient-to-r from-red-600 via-pink-500 to-purple-500 bg-clip-text text-2xl font-extrabold text-transparent sm:text-3xl">
+            Deposit Money
+          </h2>
           <div>
-            <label>Amount (₹)</label>
+            <label>Amount (BDT)</label>
             <input
               type="number"
               placeholder="Enter amount"
