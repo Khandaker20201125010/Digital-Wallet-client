@@ -148,3 +148,11 @@ body {
   height: 400px;
   width: 100%; /* ensure it spans full width */
 }
+.faqBG {
+  background-image: url('./assets/images/aboutbg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; /* ✅ important */
+  height: 400px;
+  width: 100%; /* ensure it spans full width */
+}
